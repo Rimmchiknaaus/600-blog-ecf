@@ -14,7 +14,7 @@ class Auth
 public static function getUser(string $email) 
     {
         // Prépare la requête
-        $query = '  SELECT user.id, user.name, user.firstname, user.email, user.phone, user.password, user.hashedPassword, user.role';
+        $query = '  SELECT user.id, user.name, user.email, user.password, user.hashedPassword, user.role';
         $query .= ' FROM user';
         $query .= ' WHERE user.email = :email';
         $statement = LibBdd::connect()->prepare($query);
