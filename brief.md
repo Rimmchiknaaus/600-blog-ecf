@@ -1,6 +1,13 @@
-# 520-blog-ecf
+---
+title: 600-blog-ecf
+toc: false
+author: GRA
+date: 29-05-2025
+---
 
-![illustration](./readme-img.jpeg)
+# 600-blog-ecf
+
+![illustration](./brief-img.jpg)
 
 ## Contexte
 
@@ -17,12 +24,12 @@ vous êtes en **totale autonomie** sur le sujet.
 
 - Ecrire le logiciel d'un **blog**, avec les fonctionnalités que vous pensez essentielles.
 - Le mettre en ligne.
-- Le mettre en valeur au travers d'une démonstration, appuyée d'un support visuel, de 5 minutes.
+- Le mettre en valeur au travers d'une démonstration, appuyée d'un support visuel, de **10 minutes**.
 
 ## Contraintes
 
 Il n'y en a pas,
-à part le **temps**... -> présentation en public le **vendredi 28 juin 2024, 9h**
+à part le **temps**... -> présentation en public le **vendredi 16 mai 2025, 9h**
 
 ## Livrable
 
@@ -35,19 +42,27 @@ Il va donc falloir **faire des choix**, ou fournir des documents de moindre qual
 **Libre à vous !**
 
 Liste 'idéale' des documents composant le livrable :
+
 - Etude de l'expression de besoin (un résumé du projet au format texte)
-- Etablissemnt du cahier des charges (fonctionnalités, rôles)
+
+- Etablissement du cahier des charges (fonctionnalités, rôles)
+
 - Mise en place d'un planning (anticiper toujours sur 80% du temps prévu)
+
 - Maquettage - arborescence de site
 - Maquettage - Zoning / wireframe
-- Maquettage - Charte graphique (ça peut se zapper)
-- Maquettage - Maquettage statique (ça peut se zapper, si on a un wireframe)
-- Maquettage - Maquettage dynamique (non, ça se zappe pas)
+- Maquettage - Charte graphique (rapide)
+- Maquettage - Maquettage statique (ça peut se zapper, si on a un solide wireframe)
+- Maquettage - Maquettage dynamique
+
 - Conception BDD - Dictionnaire de données, MCD,MLD, MPD (vous êtes super fort là-dessus)
-- Réalisation (code versionné avec git, mais oui on est d'accord, c'est là qu'est le taf -> planning)
+
+- Réalisation (code versionné avec git)
+
 - Livraison et déploiement (mode d'emploi)
+
 - Rédaction du support de présentation visuel (diaporama)
-- Restitution orale et animation en public (merci de m'avoir écouté)
+- Restitution orale et animation en public
 
 ## Évaluation
 
