@@ -37,7 +37,7 @@ class loginUser extends Ctrl
             $_SESSION['user'] = $user;
         
             $_SESSION['msg']['success'] = 'Bienvenue, ' . htmlspecialchars($user['name']) . '!';
-            $this->redirectTo('/ctrl/home.php');
+            $this->redirectTo('/ctrl/article-list.php');
             exit();
         } else {
             $_SESSION['msg']['warning'] = 'Email ou mot de passe incorrect.';

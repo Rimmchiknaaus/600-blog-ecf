@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/auth.php';
 
 use App\Ctrl\Ctrl;
-use App\Model\Lib\Auth; 
+
 
 /** Montre le forme pour ajouter des question. */
 class logoutUser extends Ctrl

@@ -6,5 +6,5 @@ $PageTitle ='Accueil';
 
 
 include '../view/_header.php';
-include '../view/home.php';
+include '../view/article-list.php';
 include '../view/_footer.php';

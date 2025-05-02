@@ -1,2 +1,2 @@
 <?php
-header('Location:/ctrl/home.php');
+header('Location:/ctrl/article-list.php');

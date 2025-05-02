@@ -11,7 +11,7 @@
             <li><a class="logo" href="/index.php">Blog</a></li>
         </ul>
         <ul class="nav-rignt">
-            <li><a href="/ctrl/home.php">Home</a></li>
+            <li><a href="/ctrl/article-list.php">Home</a></li>
                     <?php if (!empty($_SESSION['user'])): ?>
                         <li><a href="/ctrl/profile.php">Bonjour, <?= ($_SESSION['user']['name']) ?>!</a></li>
                         <li> <a href="/ctrl/logout.php">Déconnexion</a></li>
