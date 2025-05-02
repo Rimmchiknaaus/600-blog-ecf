@@ -26,4 +26,16 @@ class Article
         return $listArticle;
     }
 
+    public static function readAllCategorie(): array
+    {
+        $query = '  SELECT categorie.id, categorie.label';
+        $query .= ' FROM categorie';
+        $statement = LibBdd::connect()->prepare($query);
+
+        $statement->execute();
+        $listCategorie = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $listCategorie;
+    }
+
 }
