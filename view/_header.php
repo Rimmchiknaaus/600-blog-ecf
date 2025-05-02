@@ -6,6 +6,7 @@
     <title><?= $args['pageTitle'] ?? $pageTitle ?? ''?></title>
 </head>
 <body>
+    <header>
     <nav class="navbar">
         <ul class="nav-left">
             <li><a class="logo" href="/index.php">Blog</a></li>
@@ -20,6 +21,10 @@
                         <li> <a href="/ctrl/register-display.php">Inscription</a></li>
                     <?php endif; ?>
         </ul>
-    </nav>
+        <section id="pageTitle">
+            <h1><?= $args['pageTitle'] ?? '' ?></h1>
+        </section>
+    </header>
+</nav>
 </body>
 </html>

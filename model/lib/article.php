@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Lib\Auth;
+namespace App\Model\Lib\Article;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/bdd.php';
 
