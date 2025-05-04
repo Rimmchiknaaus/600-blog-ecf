@@ -1,11 +1,16 @@
 <main>
-<pre><?php var_dump($_SESSION) ?></pre>
-
+<?php
+$listArticle = $args['listArticle'] ?? [];
+$session = $args['session'] ?? [];
+?>
+<?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+    <a href="/ctrl/article-add-display.php">Ajouter une article</a>
+<?php endif; ?>
 <section class="articles">
     <h1>Derniers articles</h1>
     <?php if (!empty($listArticle)): ?>
         <div class="article-grid">
-            <?php foreach ($listArticle as $article): ?>
+            <?php foreach ($args ['listArticle'] as $article): ?>
                 <div class="article-card">
                     <?php if (!empty($article['image'])): ?>
                         <img src="<?= $article['image'] ?>" alt="Image de l'article">
@@ -34,7 +39,5 @@
         <p>Aucun article trouvé.</p>
     <?php endif; ?>
 </section>
-
-    </div>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla commodi consequuntur architecto quaerat odio nihil autem asperiores maxime perferendis quisquam repudiandae quis, voluptate quam sit veritatis porro. Eum, ipsam incidunt?
+   <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla commodi consequuntur architecto quaerat odio nihil autem asperiores maxime perferendis quisquam repudiandae quis, voluptate quam sit veritatis porro. Eum, ipsam incidunt?</p>
 </main>

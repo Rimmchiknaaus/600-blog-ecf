@@ -49,7 +49,7 @@ CREATE TABLE article (
     ,titre VARCHAR(100) NOT NULL
     ,contenu TEXT NOT NULL
     ,image VARCHAR(100) NOT NULL
-    ,fichier  VARCHAR(100) NOT NULL
+    ,fichier  VARCHAR(100) NULL
     ,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  COMMENT 'Date de création'
     ,updated_at TIMESTAMP NULL ON UPDATE NOW() COMMENT 'Date de dernière modification'
 );

@@ -6,35 +6,45 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/article.php';
 
 use App\Ctrl\Ctrl;
-use App\Model\Lib\Article\Article as LibArticle;  
+use App\Model\Lib\Article\Article as LibArticle;
 
 class ArticleAdd extends Ctrl
 {
-    /** @Override */
     public function getPageTitle(): ?string
     {
         return null;
     }
 
-    /** @Override */
     public function getViewFile(): ?string
     {
         return null;
     }
 
-    /** @Override */
     public function do(): void
     {
-        // Lis les informations saisies dans le formulaire
-        $number = $_POST['number'];
-        $label = $_POST['label'];
-        LibArticle;
 
-        // rediriger vers la list de question
+        $titre = $_POST['titre'];
+        $contenu = $_POST['contenu'];
+        $categories = $_POST['categories'] ?? [];
+        $idUser = $_SESSION['user']['id'];
+
+        $imageName = uniqid() . '_' . basename($_FILES['image']['name']);
+        $imagePath = '/uploads/images/' . $imageName;
+        move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $imagePath);
+
+
+        $fichierPath = null;
+        if (!empty($_FILES['fichier']['name'])) {
+            $fileName = uniqid() . '_' . basename($_FILES['fichier']['name']);
+            $fichierPath = '/uploads/files/' . $fileName;
+            move_uploaded_file($_FILES['fichier']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $fichierPath);
+        }
+
+        LibArticle::createArticle($titre, $contenu, $categories, $imagePath, $fichierPath, $idUser);
+
         $this->redirectTo('/ctrl/article-list.php');
     }
 }
 
-// Exécute le Controlleur
 $ctrl = new ArticleAdd();
 $ctrl->execute();

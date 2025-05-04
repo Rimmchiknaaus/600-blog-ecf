@@ -29,6 +29,7 @@ class ArticleList extends Ctrl
         $listArticle = LibArticle::readAllArticle();
 
         // Les expose à la vue
+
         $this->addViewArg('listArticle', $listArticle);
     }
 }

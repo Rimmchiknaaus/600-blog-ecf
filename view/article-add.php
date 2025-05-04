@@ -1,6 +1,6 @@
 <h1>Nouvel article</h1>
 
-<form action="" method="post" enctype="multipart/form-data">
+<form action="/ctrl/article-add.php" method="post" enctype="multipart/form-data">
     <label for="titre">Titre :</label><br>
     <input type="text" name="titre" id="titre" required><br><br>
 
@@ -13,8 +13,6 @@
     <label for="fichier">Fichier à télécharger (PDF) :</label><br>
     <input type="file" name="fichier" id="fichier" accept=".pdf"><br><br>
 
-    <label for="categories">Catégories :</label><br>
-    <div>
             <label for="categories">Catégories</label>
             <select name="categories">
                 <?php foreach ($listCategorie as $cat) { ?>
