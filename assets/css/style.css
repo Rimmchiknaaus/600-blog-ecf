@@ -1,0 +1,11 @@
+@import url('header.css');
+@import url('article-list.css');
+@import url('article-detail.css');
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(233, 229, 225);
+    color: black;
+}

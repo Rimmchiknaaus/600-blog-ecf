@@ -26,6 +26,23 @@ class Article
         return $listArticle;
     }
 
+    public static function getArticle($id): ?array
+    {
+        $query =  "SELECT article.id, article.idUser, article.titre, article.contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
+        $query .= ' FROM article';
+        $query .= ' JOIN user ON article.idUser = user.id';
+        $query .= ' LEFT JOIN article_categorie ON article.id = article_categorie.idArticle';
+        $query .= ' LEFT JOIN categorie ON article_categorie.idCategorie = categorie.id';
+        $query .= ' WHERE article.id = :id';
+        $statement = LibBdd::connect()->prepare($query);
+        $statement->bindParam(':id', $id);
+
+        $statement->execute();
+        $article = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $article;
+    }
+
     public static function readAllCategorie(): array
     {
         $query = '  SELECT categorie.id, categorie.label';
@@ -70,5 +87,17 @@ class Article
         }
     
         return $successOrFailure;
+    }
+
+    public static function readAllCommentaire(): array
+    {
+        $query = '  SELECT commentaire.id, commentaire.idArticle, commentaire.idUser, commentaire.contenu, commentaire.created_at, commentaire.updated_at,';
+        $query .= ' FROM commentaire';
+        $statement = LibBdd::connect()->prepare($query);
+
+        $statement->execute();
+        $commentaireList = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $commentaireList;
     }
 }    

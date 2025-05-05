@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $args['pageTitle'] ?? $pageTitle ?? ''?></title>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <header>
@@ -20,11 +21,12 @@
                         <li> <a href="/ctrl/login-display.php">Connexion</a></li>
                         <li> <a href="/ctrl/register-display.php">Inscription</a></li>
                     <?php endif; ?>
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                        <li> <a href="/ctrl/article-add-display.php">Ajouter un article</a></li>
+<?php endif; ?>
         </ul>
-        <section id="pageTitle">
-            <h1><?= $args['pageTitle'] ?? '' ?></h1>
-        </section>
-    </header>
-</nav>
+    </nav>
+</header>
+
 </body>
 </html>

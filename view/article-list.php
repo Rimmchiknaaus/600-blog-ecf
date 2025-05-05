@@ -1,11 +1,12 @@
+<head>
+    <link rel="stylesheet" href="/asset/css/style.css">
+</head>
 <main>
 <?php
 $listArticle = $args['listArticle'] ?? [];
 $session = $args['session'] ?? [];
 ?>
-<?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
-    <a href="/ctrl/article-add-display.php">Ajouter une article</a>
-<?php endif; ?>
+
 <section class="articles">
     <h1>Derniers articles</h1>
     <?php if (!empty($listArticle)): ?>
@@ -13,9 +14,9 @@ $session = $args['session'] ?? [];
             <?php foreach ($args ['listArticle'] as $article): ?>
                 <div class="article-card">
                     <?php if (!empty($article['image'])): ?>
-                        <img src="<?= $article['image'] ?>" alt="Image de l'article">
+                        <img class="image" src="<?= $article['image'] ?>" alt="Image de l'article">
                     <?php endif; ?>
-
+                        <div class="article-info">
                     <div class="article-meta">
                         <span class="article-date"><?= date('d/m/Y H:i', strtotime($article['created_at'])) ?></span>
                         <span class="article-author">par <?= $article['auteur'] ?></span>
@@ -31,7 +32,8 @@ $session = $args['session'] ?? [];
                         <?= substr(strip_tags($article['contenu']), 0, 150) ?>...
                     </p>
 
-                    <a href="/article-detail.php?id=<?= $article['id'] ?>" class="btn">Lire la suite</a>
+                    <a href="/ctrl/article-detail.php?id=<?= $article['id'] ?>" class="btn-detail">Lire la suite</a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
