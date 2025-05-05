@@ -13,10 +13,9 @@
             <li><a class="logo" href="/index.php">Blog</a></li>
         </ul>
         <ul class="nav-rignt">
-            <li><a href="/ctrl/article-list.php">Home</a></li>
                     <?php if (!empty($_SESSION['user'])): ?>
                         <li><a href="/ctrl/profile.php">Bonjour, <?= ($_SESSION['user']['name']) ?>!</a></li>
-                        <li> <a href="/ctrl/logout.php">Déconnexion</a></li>
+                        <li> <a href="/ctrl/logout.php">Se déconnecter</a></li>
                     <?php else: ?>
                         <li> <a href="/ctrl/login-display.php">Connexion</a></li>
                         <li> <a href="/ctrl/register-display.php">Inscription</a></li>
