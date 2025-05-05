@@ -31,6 +31,7 @@ class ArticleList extends Ctrl
         // Les expose à la vue
 
         $this->addViewArg('listArticle', $listArticle);
+
     }
 }
 

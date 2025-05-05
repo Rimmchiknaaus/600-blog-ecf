@@ -87,17 +87,5 @@ class Article
         }
     
         return $successOrFailure;
-    }
-
-    public static function readAllCommentaire(): array
-    {
-        $query = '  SELECT commentaire.id, commentaire.idArticle, commentaire.idUser, commentaire.contenu, commentaire.created_at, commentaire.updated_at,';
-        $query .= ' FROM commentaire';
-        $statement = LibBdd::connect()->prepare($query);
-
-        $statement->execute();
-        $commentaireList = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return $commentaireList;
-    }
+    }   
 }    

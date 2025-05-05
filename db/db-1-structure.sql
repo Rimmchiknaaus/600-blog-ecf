@@ -73,6 +73,16 @@ CREATE TABLE article_categorie (
     ,idCategorie INT NOT NULL
 );
 
+ALTER TABLE article
+
+    ADD CONSTRAINT fk_article_user FOREIGN KEY (idUser) REFERENCES user(id)
+;
+ALTER TABLE commentaire
+
+    ADD CONSTRAINT fk_commentaire_user FOREIGN KEY (idUser) REFERENCES user(id)
+    ,ADD CONSTRAINT fk_commentaire_article FOREIGN KEY(idArticle) REFERENCES article(id)
+;
+
 
 
 ALTER TABLE article_categorie

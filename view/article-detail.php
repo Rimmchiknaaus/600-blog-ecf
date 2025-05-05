@@ -1,7 +1,6 @@
 <main>
 <section class="articles">
-
-    <?php foreach ($args['article'] as $article) { ?>
+    <?php foreach ($args['articleList'] as $article) { ?>
         <div class="article-show">
     <h2><?= $article['titre'] ?></h2>
     <img class="article-image" src="<?= $article['image'] ?>" alt="Image de l'article">
@@ -13,8 +12,8 @@
     <p class="article-text"><?= $article['contenu'] ?></p>
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
         <ul class="article-action">
-            <li><a href="/article-update-display.php?id=<?= $article['id'] ?>" class="btn-article">Modifier</a></li>
-            <li><a href="/article-delete.php?id=<?= $article['id'] ?>" class="btn-article">Supprimer</a></li>
+            <li><a href="/ctrl/article-update-display.php?id=<?= $article['id'] ?>" class="btn-article">Modifier</a></li>
+            <li><a href="/ctrl/article-delete.php?id=<?= $article['id'] ?>" class="btn-article">Supprimer</a></li>
         </ul>
     <?php endif; ?>
         </div>
@@ -22,16 +21,12 @@
 </section>
 <section class="commentaires">
     <h3>Commentaires</h3>
-    <?php if (!empty($commentaireList)): ?>
-        <?php foreach ($commentaireList as $commentaire): ?>
+        <?php foreach ($args['commentaireList'] as $commentaire){ ?>
             <div class="commentaire">
                 <strong><?= $commentaire['auteur'] ?></strong>
                 <em><?= date('d/m/Y H:i', strtotime($commentaire['created_at'])) ?></em>
                 <p><?= nl2br(htmlspecialchars($commentaire['contenu'])) ?></p>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>Aucun commentaire pour l’instant.</p>
-    <?php endif; ?>
+        <?php } ?>
 </section>
 </main>
