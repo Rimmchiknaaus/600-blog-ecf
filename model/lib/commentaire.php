@@ -25,5 +25,17 @@ class Commentaire
         return $commentaireList;
     }
 
-    
+    public static function createCommentaire($idArticle, $idUser, $contenu): bool
+    {
+        $query = '  INSERT INTO commentaire(idArticle, idUser, contenu) VALUES(:idArticle, :idUser, :contenu)';
+        $statement = LibBdd::connect()->prepare($query);
+        $statement->bindParam(':idArticle', $idArticle);
+        $statement->bindParam(':idUser', $idUser);
+        $statement->bindParam(':contenu', $contenu);
+
+        $successOrFailure = $statement->execute();
+
+        return $successOrFailure;
+    }
+
 }
