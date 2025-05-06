@@ -43,16 +43,18 @@ class Article
         return $article;
     }
 
-    public static function readAllCategorie(): array
+    public static function getCategorie($articleTypeAsEnum): ?array
     {
+        $article = $articleTypeAsEnum->label;
         $query = '  SELECT categorie.id, categorie.label';
         $query .= ' FROM categorie';
+        $query .= ' WHERE categorie.label = :label';
         $statement = LibBdd::connect()->prepare($query);
-
+        $statement->bindParam(':label', $article);
         $statement->execute();
-        $listCategorie = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $categorie = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        return $listCategorie;
+        return $categorie;
     }
 
     public static function createArticle( string $titre, string $contenu, $categories, string $imagePath,?string $fichierPath,int $idUser): bool {

@@ -38,4 +38,45 @@ class Commentaire
         return $successOrFailure;
     }
 
+    public static function getCommentaire($id):  ?array
+    {
+        $query = '  SELECT commentaire.id, commentaire.idArticle, commentaire.idUser, commentaire.contenu, commentaire.created_at, commentaire.updated_at, user.name AS auteur';
+        $query .= ' FROM commentaire';
+        $query .= ' WHERE commentaire.id = :id';
+        $statement = LibBdd::connect()->prepare($query);
+        $statement->bindParam(':id', $id);
+
+        $commentaire = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $commentaire;
+    }
+
+    public static function updateCommentaire($id, $contenu):  bool
+    {
+        $query = '  UPDATE commentaire';
+        $query .= ' SET ';
+        $query .= ' commentaire.contenu = :contenu ';
+        $query .= ' WHERE commentaire.id = :id';
+        $statement = LibBdd::connect()->prepare($query);
+        $statement->bindParam(':contenu', $contenu);
+        $statement->bindParam(':id', $id);
+
+
+        $successOrFailure = $statement->execute();
+
+        return $successOrFailure;
+    }
+    public static function deleteCommentaire($id):  bool
+    {
+        $query = '  DELETE FROM commentaire';
+        $query .= ' WHERE commentaire.id = :id';
+        $statement = LibBdd::connect()->prepare($query);
+        $statement->bindParam(':id', $id);
+
+
+        $successOrFailure = $statement->execute();
+
+        return $successOrFailure;
+    }
+
 }

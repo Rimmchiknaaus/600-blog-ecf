@@ -27,10 +27,11 @@ class ArticleList extends Ctrl
     {
         // Lister des questions
         $listArticle = LibArticle::readAllArticle();
-
+ 
         // Les expose à la vue
 
         $this->addViewArg('listArticle', $listArticle);
+
 
     }
 }

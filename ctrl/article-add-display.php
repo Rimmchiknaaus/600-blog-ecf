@@ -1,14 +1,31 @@
 <?php
 
-include '../model/lib/article.php';
-use App\Model\Lib\Article\Article as LibArticle;  
-// Définit le titre de la page
-$pageTitle = "Nouvel article";
+namespace App\Ctrl;
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/article.php';
+
+use App\Ctrl\Ctrl;
+use App\Model\Lib\Article\Article as LibArticle;
+
+class ArticleAddDisplay extends Ctrl
+{
+    public function getPageTitle(): ?string
+    {
+        return 'Nouvel article';
+    }
+
+    public function getViewFile(): ?string
+    {
+        return '/view/article-add.php';
+    }
+
+    public function do(): void
+    {
 
 
-$listCategorie = LibArticle::readAllCategorie();
+    }
+}
 
-// Rends la vue
-include '../view/_header.php';
-include '../view/article-add.php';
-include '../view/_footer.php';
+$ctrl = new ArticleAddDisplay();
+$ctrl->execute();

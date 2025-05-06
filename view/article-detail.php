@@ -34,17 +34,35 @@
 </section>
 <section class="commentaires">
     <h3>Commentaires</h3>
+    <?php $editCommentId = $_GET['editCommentaire'] ?? null; ?>
         <?php foreach ($args['commentaireList'] as $commentaire){ ?>
             <div class="commentaire">
                 <strong><?= $commentaire['auteur'] ?></strong>
-                <em><?= date('d/m/Y H:i', strtotime($commentaire['created_at'])) ?></em>
-                <p><?= nl2br(htmlspecialchars($commentaire['contenu'])) ?></p>
-                <?php if (isset($_SESSION['user']) &&( $_SESSION['user']['id'] == $commentaire['idUser'] ||$_SESSION['user']['role'] === 'admin')){ ?>
+                <?php if ($commentaire['updated_at']):?>
+                <em><span>updated at </span><?= date('d/m/Y H:i', strtotime($commentaire['updated_at'])) ?></em>
+                <?php else: ?>
+                <em><span>created at </span><?= date('d/m/Y H:i', strtotime($commentaire['created_at'])) ?></em>
+                <?php endif; ?>
+                <?php if ($editCommentId == $commentaire['id']): ?>
+
+                   <form action="/ctrl/commentaire-update.php" method="post">
+                     <input type="hidden" name="id" value="<?= $commentaire['id'] ?>">
+                     <input type="hidden" name="idArticle" value="<?= $_GET['id'] ?>">
+                     <textarea name="contenu" rows="4" required><?= htmlspecialchars($commentaire['contenu']) ?></textarea><br>
+                     <button type="submit">Enregistrer</button>
+                     <a href="/ctrl/article-detail.php?id=<?= $_GET['id'] ?>">Annuler</a>
+                   </form>
+                <?php else: ?>
+                    <p><?= nl2br(htmlspecialchars($commentaire['contenu'])) ?></p>
+               <?php endif; ?>
             <div class="commentaire-actions">
-                <a href="/ctrl/commentaire-edit-display.php?id=<?= $commentaire['id'] ?>" class="btn-commentaire">Modifier</a>
-                <a href="/ctrl/commentaire-delete.php?id=<?= $commentaire['id'] ?>" class="btn-commentaire" onclick="return confirm('Supprimer ce commentaire ?')">Supprimer</a>
+            <?php if (isset($_SESSION['user']) &&( $_SESSION['user']['id'] == $commentaire['idUser'] )){ ?>
+                <a href="/ctrl/article-detail.php?id=<?= $_GET['id'] ?>&editCommentaire=<?= $commentaire['id'] ?>" class="btn-commentaire">Modifier</a>
+                <?php } ?>
+                <?php if (isset($_SESSION['user']) &&( $_SESSION['user']['id'] == $commentaire['idUser'] ||$_SESSION['user']['role'] === 'admin')){ ?>
+                <a href="/ctrl/commentaire-delete.php?id=<?= $commentaire['id'] ?>&idArticle=<?= $commentaire['idArticle'] ?>" class="btn-commentaire" onclick="return confirm('Supprimer ce commentaire ?')">Supprimer</a>
+                <?php } ?>
             </div>
-            <?php } ?>
             </div>
         <?php } ?>
         <?php if (empty($commentaire)){ ?>

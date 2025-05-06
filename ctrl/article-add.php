@@ -40,6 +40,7 @@ class ArticleAdd extends Ctrl
             move_uploaded_file($_FILES['fichier']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $fichierPath);
         }
 
+    
         LibArticle::createArticle($titre, $contenu, $categories, $imagePath, $fichierPath, $idUser);
 
         $this->redirectTo('/ctrl/article-list.php');
