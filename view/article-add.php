@@ -13,13 +13,15 @@
     <label for="fichier">Fichier à télécharger (PDF) :</label><br>
     <input type="file" name="fichier" id="fichier" accept=".pdf"><br><br>
 
-            <label for="categories">Catégories</label>
-            <select name="categories">
-                <?php foreach ($listCategorie as $cat) { ?>
-                    <option value="<?= $cat['id'] ?>">#<?= $cat['label'] ?></option>
-                <?php } ?>
-            </select>
-        </div>
+    <label for="categories">Catégories</label><br>
+    <?php foreach ($args['listCategorie'] as $cat): ?>
+
+        <input type="checkbox" name="categories[]" value="<?= $cat['id'] ?>"
+            <?= in_array($cat['id'], $args['articleCategorie'] ?? []) ? 'checked' : '' ?>>
+        <?= htmlspecialchars($cat['label']) ?>
+        <br>
+<?php endforeach; ?>
+
 
     <button type="submit">Publier</button>
 </form>

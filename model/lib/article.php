@@ -43,21 +43,35 @@ class Article
         return $article;
     }
 
-    public static function getCategorie($articleTypeAsEnum): ?array
+    public static function readAllCategorie(): ?array
     {
-        $article = $articleTypeAsEnum->label;
-        $query = '  SELECT categorie.id, categorie.label';
-        $query .= ' FROM categorie';
-        $query .= ' WHERE categorie.label = :label';
-        $statement = LibBdd::connect()->prepare($query);
-        $statement->bindParam(':label', $article);
-        $statement->execute();
-        $categorie = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return $categorie;
+    $query = 'SELECT categorie.id, categorie.label';
+    $query .= ' FROM categorie';
+    $query .= '  ORDER BY label ASC';
+    $statement = LibBdd::connect()->prepare($query);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function createArticle( string $titre, string $contenu, $categories, string $imagePath,?string $fichierPath,int $idUser): bool {
+    public static function getCategorieIdsForArticle(int $id): array
+{
+
+    $query = 'SELECT idCategorie'; 
+    $query .= ' FROM article_categorie';
+    $query .= '  WHERE idArticle = :id';
+    $statement = LibBdd::connect()->prepare($query);
+    $statement->bindParam(':id', $id);
+    $statement->execute();
+    $idCategorie = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+
+    return array_column($idCategorie, 'idCategorie');
+
+}
+
+
+    public static function createArticle( string $titre, string $contenu, $categories, string $imagePath,?string $fichierPath,int $idUser): bool 
+    {
         $pdo = LibBdd::connect();
     
         $query = 'INSERT INTO article (idUser, titre, contenu, image, fichier) VALUES (:idUser, :titre, :contenu, :image, :fichier)';
@@ -90,4 +104,64 @@ class Article
     
         return $successOrFailure;
     }   
+
+    public static function updateArticle(int $id, string $titre, string $contenu, $categories, ?string $image, ?string $fichier): bool
+{
+    $query = '  UPDATE article';
+    $query .= ' SET';
+    $query .= '  article.titre = :titre';
+    $query .= ' ,article.contenu = :contenu';
+    $query .= ' ,article.image = :image';
+    $query .= ' ,article.fichier = :fichier';
+    $query .= ' WHERE article.id = :id';
+
+    $statement = LibBdd::connect()->prepare($query);
+    $statement->bindParam(':titre', $titre);
+    $statement->bindParam(':contenu', $contenu);
+    $statement->bindParam(':image', $image);
+    $statement->bindParam(':fichier', $fichier);
+    $statement->bindParam(':id', $id);
+    $statement->execute();
+
+    $stmtDelete = LibBdd::connect()->prepare('DELETE FROM article_categorie WHERE idArticle = :idArticle');
+    $stmtDelete->execute([':idArticle' => $id]);
+
+    $stmtInsert = LibBdd::connect()->prepare('INSERT INTO article_categorie (idArticle, idCategorie) VALUES (:idArticle, :idCategorie)');
+    foreach ($categories as $catId) {
+        $stmtInsert->execute([
+            ':idArticle' => $id,
+            ':idCategorie' => $catId
+        ]);
+    }
+
+    return true;
+    }
+    public static function deleteArticle(int $id): bool
+{   
+    $db = LibBdd::connect(); 
+    $db->beginTransaction();
+
+    $query = 'DELETE FROM article_categorie';
+    $query .= ' WHERE idArticle = :id';
+    $statement = $db->prepare($query);
+    $statement->bindParam(':id', $id);
+    $statement->execute();
+
+    $query = 'DELETE FROM commentaire';
+    $query .= ' WHERE idArticle = :id';
+    $statement = $db->prepare($query);
+    $statement->bindParam(':id', $id);
+    $statement->execute();
+
+    $query = 'DELETE FROM article ';
+    $query .= ' WHERE id = :id';
+    $statement = $db->prepare($query);
+    $statement->bindParam(':id', $id);
+    $statement->execute();
+
+    $db->commit();
+    return true;
+}
+
+
 }    

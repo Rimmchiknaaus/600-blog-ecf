@@ -5,7 +5,11 @@
     <h2><?= $article['titre'] ?></h2>
     <img class="article-image" src="<?= $article['image'] ?>" alt="Image de l'article">
     <div class="article-meta">
-        <span class="article-date"><?= date('d/m/Y H:i', strtotime($article['created_at'])) ?></span>
+        <?php if ($article['updated_at']):?>
+            <em><span>updated at </span><?= date('d/m/Y H:i', strtotime($article['updated_at'])) ?></em>
+        <?php else: ?>
+            <em><span></span><?= date('d/m/Y H:i', strtotime($article['created_at'])) ?></em>
+        <?php endif; ?>
         <span class="article-author">par <?= $article['auteur'] ?></span>
     </div>
     <p class="article-categories"><?= $article['categories'] ?></p>
@@ -41,7 +45,7 @@
                 <?php if ($commentaire['updated_at']):?>
                 <em><span>updated at </span><?= date('d/m/Y H:i', strtotime($commentaire['updated_at'])) ?></em>
                 <?php else: ?>
-                <em><span>created at </span><?= date('d/m/Y H:i', strtotime($commentaire['created_at'])) ?></em>
+                <em><span></span><?= date('d/m/Y H:i', strtotime($commentaire['created_at'])) ?></em>
                 <?php endif; ?>
                 <?php if ($editCommentId == $commentaire['id']): ?>
 
