@@ -33,7 +33,7 @@
         </form>
     <?php else: ?>
         <p>Vous devez être connecté pour laisser un commentaire.</p>
-        <a href="/ctrl/login-display.php" class="btn-article">Se connecter</a>
+        <a class="btn-commentaire"  href="/ctrl/login-display.php" class="btn-article">Se connecter</a>
         <?php endif ?>
 </section>
 <section class="commentaires">
@@ -53,7 +53,7 @@
                      <input type="hidden" name="id" value="<?= $commentaire['id'] ?>">
                      <input type="hidden" name="idArticle" value="<?= $_GET['id'] ?>">
                      <textarea name="contenu" rows="4" required><?= htmlspecialchars($commentaire['contenu']) ?></textarea><br>
-                     <button type="submit">Enregistrer</button>
+                     <button  type="submit">Enregistrer</button>
                      <a href="/ctrl/article-detail.php?id=<?= $_GET['id'] ?>">Annuler</a>
                    </form>
                 <?php else: ?>
