@@ -1,5 +1,5 @@
 
-    <h2>Inscription</h2>
+    <h1>Inscription</h1>
 <?php if (!empty($_SESSION['msg'])): ?>
     <div>
         <?php foreach ($_SESSION['msg'] as $type => $message): ?>

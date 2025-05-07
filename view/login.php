@@ -1,4 +1,4 @@
-<h2>Connexion</h2>
+<h1>Connexion</h1>
         <form method="POST" action="/ctrl/login.php">
             <input type="email" name="email" placeholder="Email" required><br><br>
             <input type="password" name="password" placeholder="Mot de passe" required><br><br>
