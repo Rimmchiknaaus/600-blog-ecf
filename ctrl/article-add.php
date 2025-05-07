@@ -44,8 +44,11 @@ class ArticleAdd extends Ctrl
         LibArticle::createArticle($titre, $contenu, $categories, $imagePath, $fichierPath, $idUser);
 
         $this->redirectTo('/ctrl/article-list.php');
+
     }
 }
 
 $ctrl = new ArticleAdd();
 $ctrl->execute();
+
+

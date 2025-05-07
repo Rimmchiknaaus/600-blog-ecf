@@ -9,7 +9,8 @@
     <input type="text" name="titre" id="titre" value="<?= htmlspecialchars($article['titre']) ?>" required><br><br>
 
     <label for="contenu">Contenu :</label><br>
-    <textarea name="contenu" id="contenu" rows="10" required><?= htmlspecialchars($article['contenu']) ?></textarea><br><br>
+    <div id="editor" style="height: 200px;"></div>
+    <input type="hidden" name="contenu" id="contenuHidden"  value="<?= htmlspecialchars($article['contenu']) ?>"><br><br>
 
     <label for="image">Image de l'article :</label><br>
     <input type="file" name="image" id="image" accept="image/*"><br>
@@ -32,3 +33,19 @@
 
     <button type="submit">Publier</button>
 </form>
+
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+
+<script>
+  const quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+
+  const form = document.querySelector('form');
+  form.addEventListener('submit', function () {
+    const contenu = document.querySelector('#contenuHidden');
+    contenu.value = quill.root.innerHTML;
+  });
+</script>
