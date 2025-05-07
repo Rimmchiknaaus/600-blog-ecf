@@ -31,7 +31,7 @@
     </label><br>
 <?php endforeach; ?>
 
-    <button type="submit">Publier</button>
+    <button class="article-add " type="submit">Publier</button>
 </form>
 
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">

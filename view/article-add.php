@@ -22,7 +22,7 @@
         <?= htmlspecialchars($cat['label']) ?><br>
     <?php endforeach; ?>
 
-    <button type="submit">Publier</button>
+    <button class="article-add" type="submit">Publier</button>
 </form>
 
 
