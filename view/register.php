@@ -1,6 +1,5 @@
 
-<h2>Inscription</h2>
-
+    <h2>Inscription</h2>
 <?php if (!empty($_SESSION['msg'])): ?>
     <div>
         <?php foreach ($_SESSION['msg'] as $type => $message): ?>
@@ -36,3 +35,6 @@ function togglePassword(id) {
     field.type = field.type === 'password' ? 'text' : 'password';
 }
 </script>
+
+
+

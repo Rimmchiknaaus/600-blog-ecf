@@ -54,7 +54,8 @@
                      <input type="hidden" name="idArticle" value="<?= $_GET['id'] ?>">
                      <textarea name="contenu" rows="4" required><?= htmlspecialchars($commentaire['contenu']) ?></textarea><br>
                      <button  type="submit">Enregistrer</button>
-                     <a href="/ctrl/article-detail.php?id=<?= $_GET['id'] ?>">Annuler</a>
+                     <button  type="submit"><a href="/ctrl/article-detail.php?id=<?= $_GET['id'] ?>">Annuler</a></button>
+
                    </form>
                 <?php else: ?>
                     <p><?= nl2br(htmlspecialchars($commentaire['contenu'])) ?></p>

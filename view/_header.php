@@ -17,8 +17,8 @@
                         <li><a href="/ctrl/profile.php">Bonjour, <?= ($_SESSION['user']['name']) ?>!</a></li>
                         <li> <a href="/ctrl/logout.php">Se déconnecter</a></li>
                     <?php else: ?>
-                        <li> <a href="/ctrl/login-display.php">Connexion</a></li>
-                        <li> <a href="/ctrl/register-display.php">Inscription</a></li>
+                        <li> <a href="/ctrl/login-display.php">S'identifier</a></li>
+                        <li> <a href="/ctrl/register-display.php">S'inscrire</a></li>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
                         <li> <a href="/ctrl/article-add-display.php">Ajouter un article</a></li>
