@@ -32,7 +32,7 @@
 
 <script>
   const quill = new Quill('#editor', {
-    theme: 'snow'
+    theme: 'snow', 
   });
 
   const form = document.querySelector('form');
