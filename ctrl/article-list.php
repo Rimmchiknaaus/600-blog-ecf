@@ -26,12 +26,20 @@ class ArticleList extends Ctrl
     public function do(): void
     {
         // Lister des questions
-        $listArticle = LibArticle::readAllArticle();
- 
+
+        $categorieId = $_GET['categorie'] ?? null;
+        if ($categorieId) {
+            $listArticle =  LibArticle::getArticlesByCategorie($categorieId);
+        } else {
+            $listArticle = LibArticle::readAllArticle();
+        }
+
+        $listCategorie = LibArticle::readAllCategorie();
+
         // Les expose à la vue
 
         $this->addViewArg('listArticle', $listArticle);
-
+        $this->addViewArg('listCategorie', $listCategorie);
 
     }
 }

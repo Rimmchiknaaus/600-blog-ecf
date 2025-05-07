@@ -2,7 +2,12 @@
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 <main>
-
+<div class="filtre-categories">
+<?php foreach ($args ['listCategorie'] as $c){ ?>
+    <a href="/ctrl/article-list.php?categorie=<?= $c['id'] ?>" class="filtre"><?=$c['label']?></a>
+    <?php } ?>
+    <a href="/ctrl/article-list.php" class="filtre">All</a>
+</div>
 
 <section class="articles">
     <h1>Derniers articles</h1>

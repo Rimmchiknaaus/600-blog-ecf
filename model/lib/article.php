@@ -70,6 +70,24 @@ class Article
 }
 
 
+public static function getArticlesByCategorie(int $categorieId): array
+{
+    $query = " SELECT article.id, article.idUser, article.titre, article.contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(DISTINCT categorie.label SEPARATOR ' / ') AS categories";
+    $query .= ' FROM article';
+    $query .= ' JOIN user ON article.idUser = user.id';
+    $query .= ' JOIN article_categorie ON article.id = article_categorie.idArticle';
+    $query .= ' JOIN categorie ON categorie.id = article_categorie.idCategorie';
+    $query .= ' WHERE article_categorie.idCategorie = :categorieId';
+    $query .= ' GROUP BY article.id';
+    $query .= ' ORDER BY article.created_at DESC';   
+
+    $statement = LibBdd::connect()->prepare($query);
+    $statement->bindParam(':categorieId', $categorieId, PDO::PARAM_INT);
+    $statement->execute();
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
     public static function createArticle( string $titre, string $contenu, $categories, string $imagePath,?string $fichierPath,int $idUser): bool 
     {
         $pdo = LibBdd::connect();
