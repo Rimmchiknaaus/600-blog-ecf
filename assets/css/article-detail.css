@@ -29,7 +29,7 @@
 .commentaire-form,
 .commentaires {
     width: 70%;
-    margin: 10px ;
+    margin: 10px auto;
     padding: 10px;
     background-color: #f4f4f4;
     border-radius: 4px;
