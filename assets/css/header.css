@@ -14,7 +14,7 @@ header {
 
 /* Logo  */
 .logo {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: bold;
     text-decoration: none;
     color: #444;
@@ -42,8 +42,6 @@ li a {
     text-decoration: none;
     padding: 8px 12px;
     display: inline-block;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
     color: #626161;
 }
 
