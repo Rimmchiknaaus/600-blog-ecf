@@ -27,7 +27,6 @@ class logoutUser extends Ctrl
     public function do(): void
     {
         $_SESSION =[];  
-        $_SESSION['msg']['success'] = 'Déconnection effectueé';
         $this->redirectTo('/index.php'); 
     }
 }

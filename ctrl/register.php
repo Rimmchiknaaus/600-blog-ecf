@@ -35,7 +35,6 @@ class registerUser extends Ctrl
 
         // Vérifie les mots de passe
         if ($password !== $passwordRepeat) {
-            $_SESSION['msg']['warning'] = 'Les mots de passe ne correspondent pas.';
             $this->redirectTo('/ctrl/register-display.php');
             exit();
         }
@@ -46,7 +45,6 @@ class registerUser extends Ctrl
         $user = Auth::getUser($email);
 
         if ($user) {
-        $_SESSION['msg']['warning'] = 'Cet email est déjà utilisé.';
         $this->redirectTo('/ctrl/register-display.php');
         exit();
 }
@@ -55,11 +53,9 @@ class registerUser extends Ctrl
 
         // Ajoute une notification d'erreur
         if (!$success) {
-            $_SESSION['msg']['warning'] = 'Erreur lors de l\'inscription.';
             $this->redirectTo('/ctrl/register-display.php');
             exit();
         }
-        $_SESSION['msg']['success'] = 'Inscription réussie.';
         // rediriger vers la list de question
         $this->redirectTo('/ctrl/login-display.php');
         exit();

@@ -36,11 +36,10 @@ class loginUser extends Ctrl
         if ($user && password_verify($password, $user['hashedPassword'])) {
             $_SESSION['user'] = $user;
         
-            $_SESSION['msg']['success'] = 'Bienvenue, ' . htmlspecialchars($user['name']) . '!';
             $this->redirectTo('/ctrl/article-list.php');
             exit();
         } else {
-            $_SESSION['msg']['warning'] = 'Email ou mot de passe incorrect.';
+
             $this->redirectTo('/ctrl/login-display.php');
             exit();
         }
