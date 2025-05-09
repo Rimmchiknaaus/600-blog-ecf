@@ -26,10 +26,12 @@ class ArticleUpdateDisplay extends Ctrl
         $article = LibArticle::getArticle($id);
         $listCategorie = LibArticle::readAllCategorie();
         $articleCategorie = LibArticle::getCategorieIdsForArticle($id);
+
         
+        $this->addViewArg('article', $article);
         $this->addViewArg('articleCategorie', $articleCategorie);
         $this->addViewArg('listCategorie', $listCategorie);
-        $this->addViewArg('article', $article);
+
 
     }
 }

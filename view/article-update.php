@@ -9,8 +9,8 @@
     <input type="text" name="titre" id="titre" value="<?= htmlspecialchars($article['titre']) ?>" required><br><br>
 
     <label for="contenu">Contenu :</label><br>
-    <div id="editor" style="height: 200px;"></div>
-    <input type="hidden" name="contenu" id="contenuHidden"  value="<?= htmlspecialchars($article['contenu']) ?>"><br><br>
+    <div id="editor"><?= $article['contenu'] ?></div>
+    <input type="hidden" name="contenu" id="contenuHidden"><br><br>
 
     <label for="image">Image de l'article :</label><br>
     <input type="file" name="image" id="image" accept="image/*"><br>
@@ -48,4 +48,6 @@
     const contenu = document.querySelector('#contenuHidden');
     contenu.value = quill.root.innerHTML;
   });
+
+
 </script>
