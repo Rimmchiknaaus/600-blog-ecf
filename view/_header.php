@@ -10,9 +10,11 @@
     <header>
     <nav class="navbar">
         <ul class="nav-left">
-            <li><a class="logo" href="/index.php">Blog</a></li>
+            <li><a class="logo" href="/index.php">Blog</a></li>        
+            <button class="burger" id="burger" aria-label="Ouvrir le menu">&#9776;</button>
         </ul>
-        <ul class="nav-rignt">
+
+        <ul class="nav-right" id="navMenu">
                     <?php if (!empty($_SESSION['user'])): ?>
                         <li>Bonjour, <?= ($_SESSION['user']['name']) ?>!</li>
                         <li> <a href="/ctrl/logout.php">Se déconnecter</a></li>
@@ -27,5 +29,32 @@
     </nav>
 </header>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('navMenu');
+
+    burger.addEventListener('click', function (e) {
+        e.stopPropagation(); // не всплывает вверх
+        navMenu.classList.toggle('show');
+        burger.classList.toggle('hidden');
+    });
+
+
+    document.addEventListener('click', function (event) {
+        const isClickInsideMenu = navMenu.contains(event.target);
+        const isClickOnBurger = burger.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnBurger && navMenu.classList.contains('show')) {
+            navMenu.classList.remove('show');
+            burger.classList.remove('hidden');
+        }
+    });
+});
+</script>
+
 </body>
+
+
+
 </html>

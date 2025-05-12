@@ -1,18 +1,15 @@
+
 header {
     background-color: rgb(233, 229, 225);
     color: #444;
     padding: 12px 16px;
 }
 
-/* Barre de navigation */
-.navbar {
+.nav-left {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
-/* Logo  */
 .logo {
     font-size: 24px;
     font-weight: bold;
@@ -20,37 +17,66 @@ header {
     color: #444;
 }
 
+.burger {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #444;
+}
 
-/* Zone des liens (mobile = cachée) */
-.nav-right {
+.burger.hidden {
     display: none;
-    width: 100%;
-    margin-top: 10px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.nav-right {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: rgb(233, 229, 225);
+
+}
+.nav-right.show {
+    max-height: 500px; 
+    opacity: 1;
+    padding: 10px 8px;    
+    gap: 10px; 
+
 }
 
-
-/* Liens individuels */
-li  {
-
-    padding: 8px 12px;
-    display: inline-block;
-    color: #626161;
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+li {
+    list-style: none;
 }
 
+a {
+    text-decoration: none;
+    color: #444;
+}
 
- a:hover {
-    color: #0e0e0e;
+a:hover {
+    color: #000;
+}
+
+@media (min-width: 768px) {
+.navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.burger {
+    display: none !important;
+}
+
+.nav-right {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin-top: 0;
+    gap: 20px;
+}
 }
