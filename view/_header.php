@@ -14,7 +14,7 @@
         </ul>
         <ul class="nav-rignt">
                     <?php if (!empty($_SESSION['user'])): ?>
-                        <li><a href="/ctrl/profile.php">Bonjour, <?= ($_SESSION['user']['name']) ?>!</a></li>
+                        <li>Bonjour, <?= ($_SESSION['user']['name']) ?>!</li>
                         <li> <a href="/ctrl/logout.php">Se déconnecter</a></li>
                     <?php else: ?>
                         <li> <a href="/ctrl/login-display.php">S'identifier</a></li>
