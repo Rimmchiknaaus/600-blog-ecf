@@ -1,13 +1,24 @@
-
+/* ===== BASE ===== */
 header {
     background-color: rgb(233, 229, 225);
     color: #444;
     padding: 12px 16px;
 }
 
-.nav-left {
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+}
+.nav-top {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.burger{
+    border: none;
+    background-color: rgb(233, 229, 225);
 }
 
 .logo {
@@ -17,39 +28,77 @@ header {
     color: #444;
 }
 
-.burger {
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #444;
+/* ===== BURGER ===== */
+.burger span{
+    display: block;
+    content: " ";
+    height: 2px;
+    width: 20px;
+    background-color: black;
 }
 
-.burger.hidden {
+.burger span::before{
+    display: block;
+    position: relative;
+    top: -7px;
+    content: " ";
+    height: 2px;
+    width: 20px;
+    background-color: black;
+}
+
+
+.burger span::after{
+    display: block;
+    position: relative;
+    top: 5px;
+    content: " ";
+    height: 2px;
+    width: 20px;
+    background-color: black;
+}
+
+/* ===== NAV MENU (mobile) ===== */
+.nav-right {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 35px;
+    right: 0;
+    gap: 10px;
+    width: auto;
+    margin-top: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.burger.hidden span{
+    position: relative;
+    transform: rotate(45deg);
+}
+
+.burger.hidden span::before{
+    transform: rotate(90deg);
+    top: 0;
+}
+
+.burger.hidden span::after{
     display: none;
 }
 
-.nav-right {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: rgb(233, 229, 225);
-
-}
 .nav-right.show {
-    max-height: 500px; 
+    display: flex;
+    position: absolute;
     opacity: 1;
-    padding: 10px 8px;    
-    gap: 10px; 
-
+    max-height: 500px;
+    padding: 10px 0;
+    background-color: rgb(203, 200, 197);
 }
 
 li {
     list-style: none;
+    padding: 5px 12px;
 }
 
 a {
@@ -61,22 +110,30 @@ a:hover {
     color: #000;
 }
 
+/* ===== DESKTOP STYLES ===== */
 @media (min-width: 768px) {
-.navbar {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.burger {
-    display: none !important;
-}
+    .burger {
+        display: none;
+    }
 
-.nav-right {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    margin-top: 0;
-    gap: 20px;
-}
+    .nav-right {
+        display: flex !important;
+        flex-direction: row;
+        opacity: 1;
+        max-height: none;
+        gap: 20px;
+        padding: 0;
+        margin-top: 0;
+        width: auto;
+    }
+
+    .nav-right.show {
+        display: flex;
+    }
 }

@@ -9,10 +9,10 @@
 <body>
     <header>
     <nav class="navbar">
-        <ul class="nav-left">
-            <li><a class="logo" href="/index.php">Blog</a></li>        
-            <button class="burger" id="burger" aria-label="Ouvrir le menu">&#9776;</button>
-        </ul>
+        <div class="nav-top">
+            <li><a class="logo" href="/index.php">Blog</a></li>         
+            <button class="burger" id="burger" aria-label="Ouvrir le menu"><span></span></button>        
+        </div>
 
         <ul class="nav-right" id="navMenu">
                     <?php if (!empty($_SESSION['user'])): ?>
@@ -24,37 +24,21 @@
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
                         <li> <a href="/ctrl/article-add-display.php">Ajouter un article</a></li>
-<?php endif; ?>
+                    <?php endif; ?>
         </ul>
     </nav>
 </header>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const burger = document.getElementById('burger');
     const navMenu = document.getElementById('navMenu');
 
-    burger.addEventListener('click', function (e) {
-        e.stopPropagation(); // не всплывает вверх
+    burger.addEventListener('click', function () {
         navMenu.classList.toggle('show');
         burger.classList.toggle('hidden');
-    });
-
-
-    document.addEventListener('click', function (event) {
-        const isClickInsideMenu = navMenu.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
-
-        if (!isClickInsideMenu && !isClickOnBurger && navMenu.classList.contains('show')) {
-            navMenu.classList.remove('show');
-            burger.classList.remove('hidden');
-        }
     });
 });
 </script>
 
 </body>
-
-
-
 </html>

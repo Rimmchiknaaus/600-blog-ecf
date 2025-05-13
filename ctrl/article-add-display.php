@@ -24,7 +24,7 @@ class ArticleAddDisplay extends Ctrl
     {
 
         $listCategorie = LibArticle::readAllCategorie();
-        $this->addViewArg('listCategorie', $listCategorie);
+        $this->addViewArg('listCategorie', $listCategorie);        
     }
 }
 

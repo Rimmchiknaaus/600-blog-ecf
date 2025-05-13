@@ -11,14 +11,17 @@
 .article-action{
     display: flex;
     justify-content: right;
+    gap: 10px;
 }
 .btn-article{
     background-color: rgb(149, 143, 143);
     color: white;
     border-radius: 4px;
-    text-align: right;
-    transition: background-color 0.3s;
     text-decoration: none;
+    padding: 6px 12px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+
 }
 .btn-article:hover {
     background-color: rgb(119, 114, 114);
@@ -106,4 +109,26 @@
 .btn-commentaire:hover {
     background-color: rgb(119, 114, 114);
     color: white;
+}
+
+@media (max-width: 768px) {
+    .commentaire-form,
+.commentaires {
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+}
+.commentaire-form h3,
+.commentaires h3 {
+    font-size: 18px;
+    text-align: center;
+}
+.commentaire-form textarea {
+    padding: 5px;
+    font-size: 10px;
+    }
+
+.article-action{
+    gap: 5px;
+    }
 }
