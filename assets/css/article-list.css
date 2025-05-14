@@ -92,3 +92,38 @@ h2{
     padding: 6px;
     transition: background-color 0.3s;
 }
+/* ===== TABLET STYLES ===== */
+@media (max-width: 1023px) {
+    .filtre-categories{
+        display: flex;
+        justify-content: right;
+        gap: 5px;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    .article-grid{
+        grid-template-columns: repeat(auto-fit, minmax(400px, 0.5fr));
+        gap: 20px;
+    }
+    .image {
+        height: 300px;
+    }
+}
+/* ===== MOBILE STYLES ===== */
+@media (max-width: 768px) {
+    .filtre {
+        font-size: 12px;
+    }
+    h1{
+        background-color: brown;
+    }
+    .article-info{
+        font-size: 14px;
+    }
+    .article-grid{
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+    .image {
+        height: 400px;
+    }
+}
