@@ -1,11 +1,11 @@
 
-DROP DATABASE IF EXISTS `blog`
+DROP DATABASE IF EXISTS `blog-lang`
 ;
 
 -- Crée la base de données
 -- /!\ penser à remplacer 'GRA' par _son_ 'trigramme' !
 -- NOTE le caractère ` (aka: back-tick) doit être utilisé car le nom de la base de données commence par des chiffres et contient des caractères spéciaux tels que -
-CREATE DATABASE IF NOT EXISTS `blog`
+CREATE DATABASE IF NOT EXISTS `blog-lang`
 ;
 
 -- [OPTIONAL !] Cette section n'est absolument pas requise.
@@ -14,21 +14,21 @@ CREATE DATABASE IF NOT EXISTS `blog`
 -- Crée un compte 'applicatif'.
 -- Ce compte représente tout ce que qu'a droit de faire le 'site web' avec la 'base de données'.
 -- Le but est de donner le moins de droits possibles à ce compte, donc à tous les Utilisateurs du 'site web'.
-DROP USER IF EXISTS 'blog-web-user'@'localhost'
+DROP USER IF EXISTS 'blog-lang-web-user'@'localhost'
 ;
-CREATE USER 'blog-web-user'@'localhost' IDENTIFIED BY 'Test13_Test13_'
+CREATE USER 'blog-lang-web-user'@'localhost' IDENTIFIED BY 'Test13_Test13_'
 ;
 --
 -- Restreint au maximum les capacités (les droits) du compte 'applicatif'.
 -- Le 'compte applicatif' n'a le droit que de lire, écrire, modifer, supprimer, et rien de +. (pas de création de table, ni de destruction de table par exemple)
-GRANT SELECT, INSERT, UPDATE, DELETE ON `blog`.* TO 'blog-web-user'@'localhost'
+GRANT SELECT, INSERT, UPDATE, DELETE ON `blog-lang`.* TO 'blog-lang-web-user'@'localhost'
 ;
 
 -- Mentionne le nom de la base de données à utiliser pour exécuter les commandes SQL qui suivent
 -- (oui, il peut y avoir plusieurs bases de données sur le même serveur de base de données !)
 -- /!\ penser à remplacer 'GRA' par _son_ 'trigramme' !
 -- NOTE le caractère ` (aka: back-tick) doit être utilisé car le nom de la base de données commence par des chiffres et contient des caractères spéciaux tels que -
-USE `blog`
+USE `blog-lang`
 ;
 
 -- Crée la table 'users'
@@ -46,8 +46,10 @@ CREATE TABLE user (
 CREATE TABLE article (
      id INT AUTO_INCREMENT PRIMARY KEY
     ,idUser INT NOT NULL
-    ,titre VARCHAR(100) NOT NULL
-    ,contenu TEXT NOT NULL
+    ,en_titre VARCHAR(100) NOT NULL
+    ,en_contenu TEXT NOT NULL
+    ,fr_titre VARCHAR(100) NOT NULL
+    ,fr_contenu TEXT NOT NULL
     ,image VARCHAR(100) NOT NULL
     ,fichier  VARCHAR(100) NULL
     ,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  COMMENT 'Date de création'

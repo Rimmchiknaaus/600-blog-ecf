@@ -1,5 +1,5 @@
 -- Explicite le nom de la base de données à utiliser pour exécuter les commandes SQL à suivre
-USE `blog`
+USE `blog-lang`
 ;
 
  -- Ouvre une 'transaction' (tout le script qui suit est exécuté en entier, à la moindre erreur, tout est annulé. c'est très pratique !)
@@ -13,6 +13,7 @@ INSERT INTO categorie (id, label) VALUES
     ,(120, 'Testnets')
     ,(130, 'NFTs')
     ,(140, 'Defi')
+    ,(150, 'Airdrops')
 ;
 
 
