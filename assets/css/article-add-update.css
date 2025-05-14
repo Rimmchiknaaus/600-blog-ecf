@@ -46,7 +46,7 @@ input[type="checkbox"] {
     display: block;
     margin: 25px auto 0;
     padding: 10px 20px;
-    background-color: rgb(149, 143, 143);
+    background-color:#85939a;
     color: white;
     font-size: 16px;
     border: none;
@@ -56,5 +56,5 @@ input[type="checkbox"] {
 }
 
 article-add:hover {
-    background-color: rgb(119, 114, 114);
+    background-color: #444a4d;
 }
