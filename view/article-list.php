@@ -27,7 +27,7 @@
                         <span class="article-author">par <?= $article['auteur'] ?></span>
                     </div>
 
-                    <h2><?= $article['titre'] ?></h2>
+                    <h2 class="titre" ><?= $article['titre'] ?></h2>
 
                     <p class="article-categories">
                         <?= $article['categories'] ?>
