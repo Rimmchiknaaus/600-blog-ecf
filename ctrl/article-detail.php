@@ -17,7 +17,7 @@ class articleShow extends Ctrl
     /** @Override */
     public function getPageTitle(): ?string
     {
-        return null;
+        return 'Lire plus';
     }
 
     public function getViewFile(): ?string
