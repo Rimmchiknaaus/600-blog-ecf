@@ -1,7 +1,7 @@
 /* categories*/
 .filtre-categories{
     display: flex;
-    justify-content: right;
+    justify-content: left;
     margin: 0 auto;
     padding: 10px 20px 0px 20px;
 }
@@ -96,7 +96,6 @@ h2{
 @media (max-width: 1023px) {
     .filtre-categories{
         display: flex;
-        justify-content: right;
         gap: 5px;
         margin: 0 auto;
         padding: 10px;
@@ -113,9 +112,6 @@ h2{
 @media (max-width: 768px) {
     .filtre {
         font-size: 12px;
-    }
-    h1{
-        background-color: brown;
     }
     .article-info{
         font-size: 14px;
