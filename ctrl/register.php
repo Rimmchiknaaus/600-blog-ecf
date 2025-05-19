@@ -31,7 +31,7 @@ class registerUser extends Ctrl
         $password = $_POST['myPassword'];
         $passwordRepeat = $_POST['myPasswordRepeat'];
         $name = $_POST['myName'];
-
+        $lang = $_GET['lang'] ?? 'fr';
 
         // Vérifie les mots de passe
         if ($password !== $passwordRepeat) {
@@ -53,11 +53,11 @@ class registerUser extends Ctrl
 
         // Ajoute une notification d'erreur
         if (!$success) {
-            $this->redirectTo('/ctrl/register-display.php');
+            $this->redirectTo('/ctrl/register-display.php?lang=' . $lang);
             exit();
         }
         // rediriger vers la list de question
-        $this->redirectTo('/ctrl/login-display.php');
+        $this->redirectTo('/ctrl/login-display.php?lang=' . $lang);
         exit();
 
        

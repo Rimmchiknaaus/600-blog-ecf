@@ -23,8 +23,10 @@ class ArticleAdd extends Ctrl
     public function do(): void
     {
 
-        $titre = $_POST['titre'];
-        $contenu = $_POST['contenu'];
+        $en_titre = $_POST['en_titre'];
+        $en_contenu = $_POST['en_contenu'];
+        $fr_titre = $_POST['en_titre'];
+        $fr_contenu = $_POST['en_contenu'];
         $categories = $_POST['categories'] ?? [];
         $idUser = $_SESSION['user']['id'];
 
@@ -41,7 +43,7 @@ class ArticleAdd extends Ctrl
         }
 
     
-        LibArticle::createArticle($titre, $contenu, $categories, $imagePath, $fichierPath, $idUser);
+        LibArticle::createArticle($en_titre, $en_contenu, $fr_titre, $fr_contenu, $categories, $imagePath, $fichierPath, $idUser);
 
         $this->redirectTo('/ctrl/article-list.php');
 

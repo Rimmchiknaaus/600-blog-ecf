@@ -31,19 +31,18 @@ class loginUser extends Ctrl
         $password = $_POST['password'];
 
         $user = Auth::getUser($email); 
-
+        $lang = $_GET['lang'] ?? 'fr';
 
         if ($user && password_verify($password, $user['hashedPassword'])) {
             $_SESSION['user'] = $user;
         
-            $this->redirectTo('/ctrl/article-list.php');
+            $this->redirectTo('/ctrl/article-list.php?lang=' . $lang);       
             exit();
         } else {
 
-            $this->redirectTo('/ctrl/login-display.php');
+            $this->redirectTo('/ctrl/login-display.php?lang=' . $lang);
             exit();
         }
-       
     }
 }
 

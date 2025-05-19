@@ -25,23 +25,33 @@ class ArticleList extends Ctrl
     /** @Override */
     public function do(): void
     {
-        // Lister des questions
-
+        // Déterminer la langue
+        $lang = 'en';
+        if (isset($_GET['lang'])) {
+            $lang = $_GET['lang'];
+        }
+    
+        // Récupérer les articles selon la catégorie (si spécifiée)
         $categorieId = $_GET['categorie'] ?? null;
         if ($categorieId) {
-            $listArticle =  LibArticle::getArticlesByCategorie($categorieId);
+            $listArticle = LibArticle::getArticlesByCategorie($categorieId);
         } else {
             $listArticle = LibArticle::readAllArticle();
         }
-
+    
+        // Lire toutes les catégories
         $listCategorie = LibArticle::readAllCategorie();
-
-        // Les expose à la vue
-
+    
+        // Charger les fichiers de traduction
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/view/lang/lang.' . $lang . '.php';
+    
+        // Transmettre les variables à la vue
         $this->addViewArg('listArticle', $listArticle);
         $this->addViewArg('listCategorie', $listCategorie);
-
+        $this->addViewArg('lang', $lang);
+        $this->addViewArg('language', $language);
     }
+    
 }
 
 

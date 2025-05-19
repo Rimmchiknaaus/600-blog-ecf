@@ -25,7 +25,13 @@ class loginUserDisplay extends Ctrl
     /** @Override */
     public function do(): void
     {
-        
+        $lang = $_GET['lang'] ?? 'fr';
+
+        $language = [];
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
+
+        $this->addViewArg('lang', $lang);
+        $this->addViewArg('language', $language);
     }
 }
 

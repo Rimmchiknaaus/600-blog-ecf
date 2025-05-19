@@ -24,8 +24,10 @@ class ArticleUpdate extends Ctrl
     {
         // Lis les informations saisies dans le formulaire
         $id =  $_POST['id'];
-        $titre =  $_POST['titre'];
-        $contenu =  $_POST['contenu'];
+        $en_titre = $_POST['en_titre'];
+        $en_contenu = $_POST['en_contenu'];
+        $fr_titre = $_POST['en_titre'];
+        $fr_contenu = $_POST['en_contenu'];
         $categories =  $_POST['categories'];
         
 
@@ -43,7 +45,7 @@ class ArticleUpdate extends Ctrl
             $fichierPath = '/uploads/files/' . $fileName;
             move_uploaded_file($_FILES['fichier']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $fichierPath);
         }
-        LibArticle::updateArticle($id, $titre, $contenu, $categories, $imagePath, $fichierPath);
+        LibArticle::updateArticle($id, $en_titre, $en_contenu, $fr_titre, $fr_contenu, $categories, $imagePath, $fichierPath);
 
         // rediriger vers la list de question
         $this->redirectTo('/ctrl/article-detail.php?id=' . $id);
