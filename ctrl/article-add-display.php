@@ -17,7 +17,7 @@ class ArticleAddDisplay extends Ctrl
 
     public function getViewFile(): ?string
     {
-        return '/view/article-add.php';
+        return '/view/article-add.php?lang= . $lang';
     }
 
     public function do(): void

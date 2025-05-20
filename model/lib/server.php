@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Lib\SMTP;
+namespace App\Model\Lib;
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 class Server
 {
@@ -19,7 +19,7 @@ class Server
      */
     public static function connect(): PHPMailer
     {
-        $config = parse_ini_file(__DIR__ . '/../../cfg/mail.ini');
+        $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/cfg/mail.ini');
 
         $mail = new PHPMailer(true);
 

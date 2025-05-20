@@ -1,3 +1,9 @@
+
+<?php
+$lang = $args['lang'];
+$language = $args['language'];
+?>
+
 <h1>Nouvel article</h1>
 
 <form action="/ctrl/article-add.php" method="post" enctype="multipart/form-data">
