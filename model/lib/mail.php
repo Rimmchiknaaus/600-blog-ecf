@@ -13,7 +13,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/server.php';
 
 class Mailer
 {
-    public static function sendEmail(): PhpMailer
+    public static function sendEmail(): PHPMailer
     {
         $mail = new PHPMailer(true);
         $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/cfg/mail.ini');

@@ -5,10 +5,13 @@ namespace App\Ctrl;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/auth.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/mail.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use App\Model\Lib\Mailer;
 use App\Ctrl\Ctrl;
 use App\Model\Lib\Auth\Auth;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 
 /** Montre le forme pour ajouter des question. */
 class registerUser extends Ctrl
@@ -37,9 +40,22 @@ class registerUser extends Ctrl
 
         $mail = Mailer::sendEmail ();
 
+
+        // Twig
+
+        $twigLoader = new FilesystemLoader(__DIR__ . '/../model/mail/templates');
+        $twig = new Environment($twigLoader);
+        $template = $twig->load('hello-' . $lang . '.twig');
+        $bodyMsg = $template->render(['name' => $name]);
+
+        $mail->addAddress ($email);  //Add a recipient     
+        $mail->Subject = ($lang === 'en') ? 'Welcome to  Web3@Crypto' : 'Bienvenue sur Web3@Crypto';
+        $mail->Body    = $bodyMsg; 
+        //$mail->AltBody = strip_tags($bodyMsg);
+
         // Vérifie les mots de passe
         if ($password !== $passwordRepeat) {
-            $this->redirectTo('/ctrl/register-display.php');
+            $this->redirectTo('/ctrl/register-display.php?lang=' . $lang);
             exit();
         }
         // Hachage du mot de passe
@@ -49,22 +65,9 @@ class registerUser extends Ctrl
         $user = Auth::getUser($email);
 
         if ($user) {
-            $mail->addAddress ($email);  //Add a recipient   
-            $mail->Subject = " Adresse e-mail deja utilisée";
-            $mail->Body = 'Bonjour,' . $name . '! L’adresse e-mail est déjà associée à un compte. Si vous avez oublié votre mot de passe, vous pouvez le réinitialiser. 
-            Si vous pensez qu’il s’agit d’une erreur, n’hésitez pas à nous contacter.' ;
-            $mail->AltBody ='altbody';
-            $success = $mail->send();
-
             $this->redirectTo('/ctrl/register-display.php?lang=' . $lang);
             exit();
             }
-    
-
-        $mail->addAddress ($email);  //Add a recipient     
-        $mail->Subject = 'Bienvenue sur Web3@Crypto';
-        $mail->Body    = 'Bonjour,' . $name . '! Votre compte a bien été créé. Vous pouvez maintenant vous connecter et commencer à explorer notre contenu.';
-        $mail->AltBody ='altbody';
 
         $success = Auth::createUser($name, $email, $password,  $hashedPassword);
         $success = $mail->send();

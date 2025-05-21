@@ -24,7 +24,7 @@ class Server
         $mail = new PHPMailer(true);
 
         // Configuration SMTP
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;     
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;     
         $mail->isSMTP();
         $mail->Host       = $config['host'];
         $mail->SMTPAuth   = true;
