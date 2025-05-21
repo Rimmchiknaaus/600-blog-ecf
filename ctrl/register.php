@@ -35,7 +35,7 @@ class registerUser extends Ctrl
         $name = $_POST['myName'];
         $lang = $_GET['lang'] ?? 'fr';
 
-
+        $mail = Mailer::sendEmail ();
 
         // Vérifie les mots de passe
         if ($password !== $passwordRepeat) {
@@ -49,31 +49,25 @@ class registerUser extends Ctrl
         $user = Auth::getUser($email);
 
         if ($user) {
-            $subject = ' Adresse e-mail déjà utilisée';
-            $body = 'Bonjour' . $name . '! L’adresse e-mail [email] est déjà associée à un compte sur. Si vous avez oublié votre mot de passe, vous pouvez le réinitialiser ici : [lien de réinitialisation]
-            Si vous pensez qu’il s’agit d’une erreur, n’hésitez pas à nous contacter' ;
-            $altbody =  'altbody';
-            $adress = $email;
-            $cc = 'cc@example.com';
-            $bcc ='bcc@example.com';
-    
-            $mailer = Mailer::sendEmail ($adress, $cc, $bcc, $subject, $body, $altbody);
+            $mail->addAddress ($email);  //Add a recipient   
+            $mail->Subject = " Adresse e-mail deja utilisée";
+            $mail->Body = 'Bonjour,' . $name . '! L’adresse e-mail est déjà associée à un compte. Si vous avez oublié votre mot de passe, vous pouvez le réinitialiser. 
+            Si vous pensez qu’il s’agit d’une erreur, n’hésitez pas à nous contacter.' ;
+            $mail->AltBody ='altbody';
+            $success = $mail->send();
+
             $this->redirectTo('/ctrl/register-display.php?lang=' . $lang);
             exit();
             }
     
 
- 
-        $subject = 'Bienvenue sur Web3@Crypto';
-        $body = 'Bonjour' . $name . '! Votre compte a bien été créé. Vous pouvez maintenant vous connecter et commencer à explorer notre contenu.';
-        $altbody =  'altbody';
-        $adress = $email;
-        $cc = 'cc@example.com';
-        $bcc ='bcc@example.com';
-
-        $mailer = Mailer::sendEmail ($adress, $cc, $bcc, $subject, $body, $altbody);
+        $mail->addAddress ($email);  //Add a recipient     
+        $mail->Subject = 'Bienvenue sur Web3@Crypto';
+        $mail->Body    = 'Bonjour,' . $name . '! Votre compte a bien été créé. Vous pouvez maintenant vous connecter et commencer à explorer notre contenu.';
+        $mail->AltBody ='altbody';
 
         $success = Auth::createUser($name, $email, $password,  $hashedPassword);
+        $success = $mail->send();
 
         // Ajoute une notification d'erreur
         if (!$success) {
