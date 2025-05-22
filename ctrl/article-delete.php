@@ -10,31 +10,26 @@ use App\Model\Lib\Article\Article as LibArticle;
 
 class articleDelete extends Ctrl
 {
-    /** @Override */
     public function getPageTitle(): ?string
     {
         return null;
     }
+
     public function getViewFile(): ?string
     {
         return null;
     }
 
-    /** @Override */
     public function do(): void
     {
-        //Supprime la Question
         $id = $_GET['id'];
         $lang = $_GET['lang'] ?? 'fr';
+
         LibArticle::deleteArticle($id);
 
-
-        // // Redirige vers la liste des Questions
         $this->redirectTo('/ctrl/article-list.php?lang=' . $lang);
     }
 }
 
-
-// Exécute le Controlleur
 $ctrl = new articleDelete();
 $ctrl->execute();

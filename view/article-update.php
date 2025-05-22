@@ -1,20 +1,21 @@
 <?php
 $lang = $args['lang'];
 $language = $args['language'];
+$article = $args['article'];
+$titre = $article['titre'] ?? '';
 ?>
 
 <h1><?= $language['article_edit_title']; ?></h1>
 
-<?php foreach($args['article'] as $article); ?>
-
 <form action="/ctrl/article-update.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= htmlspecialchars($article['id']) ?>">
+    <input type="hidden" name="lang" value="<?= htmlspecialchars($lang) ?>">
 
     <label for="titre"><?= $language['article_edit_label_title']; ?></label><br>
-    <input type="text" name="titre" id="titre" value="<?= htmlspecialchars($article['titre']) ?>" required><br><br>
+    <input type="text" name="titre" value="<?= htmlspecialchars($titre) ?>">
 
     <label for="contenu"><?= $language['article_edit_label_body']; ?></label><br>
-    <div id="editor"><?= $article['contenu'] ?></div>
+    <div id="editor"><?= $article['contenu']?></div>
     <input type="hidden" name="contenu" id="contenuHidden"><br><br>
 
     <label for="image"><?= $language['article_edit_label_image']; ?></label><br>
@@ -38,10 +39,8 @@ $language = $args['language'];
     <button class="article-add" type="submit"><?= $language['article_edit_button_submit']; ?></button>
 </form>
 
-
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
-
 
 <script>
   const quill = new Quill('#editor', {
@@ -53,6 +52,4 @@ $language = $args['language'];
     const contenu = document.querySelector('#contenuHidden');
     contenu.value = quill.root.innerHTML;
   });
-
-
 </script>

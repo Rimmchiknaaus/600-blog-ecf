@@ -1,4 +1,3 @@
-
 <?php
 $lang = $args['lang'];
 $language = $args['language'];
@@ -9,8 +8,8 @@ $language = $args['language'];
 <form action="/ctrl/article-add.php" method="post" enctype="multipart/form-data">
     <label for="lang"><?= $language['language']; ?></label><br>
     <select name="lang" id="lang" required>
-        <option value="fr">Français</option>
-        <option value="en">English</option>
+        <option value="fr" <?php if ($lang == 'fr'){ ?> selected <?php } ?>>Français</option>
+        <option value="en" <?php if ($lang == 'en'){ ?> selected <?php } ?>>English</option>
     </select><br><br>
 
     <label for="titre"><?= $language['article_add_label_title']; ?></label><br>
@@ -36,15 +35,12 @@ $language = $args['language'];
     <button class="article-add" type="submit"><?= $language['article_add_button_send']; ?></button>
 </form>
 
-
-
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
-
 <script>
   const quill = new Quill('#editor', {
-    theme: 'snow', 
+    theme: 'snow',
   });
 
   const form = document.querySelector('form');

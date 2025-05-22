@@ -10,14 +10,16 @@ use  App\Model\Lib\BDD as LibBdd;
 
 class Article
 {
-    public static function readAllArticle(): array
+    public static function readAllArticle(string $lang = 'fr'): array
     {
+        $titreCol = $lang . '_titre';
+        $contenuCol = $lang . '_contenu';
 
-        $query = "SELECT article.id, article.idUser, article.en_titre AS titre, article.en_contenu AS contenu, article.fr_titre  AS titre, article.fr_contenu AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
+        $query = "SELECT article.id, article.idUser, article.$titreCol AS titre, article.$contenuCol AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
         $query .= ' FROM article';
         $query .= ' JOIN user ON article.idUser = user.id';
         $query .= ' LEFT JOIN article_categorie ON article.id = article_categorie.idArticle';
-        $query .= ' LEFT JOIN categorie ON article_categorie.idCategorie = categorie.id';
+        $query .= ' LEFT JOIN categorie ON article_categorie.idCategorie = categorie.id'; 
         $query .= ' GROUP BY article.id';
         $query .= ' ORDER BY article.created_at DESC';
         $statement = LibBdd::connect()->prepare($query);
@@ -25,10 +27,12 @@ class Article
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getArticle($id): ?array
+    public static function getArticle(int $id, string $lang = 'fr'): ?array
     {
+        $titreCol = $lang . '_titre';
+        $contenuCol = $lang . '_contenu';
 
-        $query =  "SELECT article.id, article.idUser, article.en_titre AS titre, article.en_contenu AS contenu, article.fr_titre  AS titre, article.fr_contenu AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
+        $query =  "SELECT article.id, article.idUser, article.$titreCol AS titre, article.$contenuCol AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
         $query .= ' FROM article';
         $query .= ' JOIN user ON article.idUser = user.id';
         $query .= ' LEFT JOIN article_categorie ON article.id = article_categorie.idArticle';
@@ -37,7 +41,11 @@ class Article
         $statement = LibBdd::connect()->prepare($query);
         $statement->bindParam(':id', $id);
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        $article = $statement->fetch(PDO::FETCH_ASSOC);
+
+    
+        return $article;
     }
 
     public static function readAllCategorie(): ?array
@@ -111,20 +119,22 @@ class Article
         return $successOrFailure;
     }
 
-    public static function updateArticle(int $id, string $en_titre, string $en_contenu, string $fr_titre, string $fr_contenu, $categories, ?string $image, ?string $fichier): bool
+    public static function updateArticle(int $id, string $lang,  string $titre, string $contenu, $categories, ?string $image, ?string $fichier): bool
     {
 
+        $titreCol = $lang . '_titre';
+        $contenuCol = $lang . '_contenu';
 
-        $query = 'UPDATE article SET en_titre = :en_titre, en_contenu = :en_contenu, fr_titre = :fr_titre, fr_contenu = :fr_contenu, image = :image, fichier = :fichier WHERE id = :id';
+        $query = "UPDATE article SET $titreCol = :titre, $contenuCol = :contenu, image = :image, fichier = :fichier WHERE id = :id";
 
         $statement = LibBdd::connect()->prepare($query);
-        $statement->bindParam(':en_titre', $en_titre);
-        $statement->bindParam(':en_contenu', $en_contenu);
-        $statement->bindParam(':fr_titre', $fr_titre);
-        $statement->bindParam(':fr_contenu', $fr_contenu);
+        $statement->bindParam(':titre', $titre);
+        $statement->bindParam(':contenu', $contenu);
         $statement->bindParam(':image', $image);
         $statement->bindParam(':fichier', $fichier);
         $statement->bindParam(':id', $id);
+
+        $statement->execute(); 
 
         $stmtDelete = LibBdd::connect()->prepare('DELETE FROM article_categorie WHERE idArticle = :idArticle');
         $stmtDelete->execute([':idArticle' => $id]);

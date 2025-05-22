@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,12 @@
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
                         <li> <a href="/ctrl/article-add-display.php?lang=<?= $lang ?>"><?=$language['add_article']?></a></li>
                     <?php endif; ?>
+                    <li><div class="language-link">
+    <a class="language-link-item" href="/ctrl/article-list.php?lang=en"
+        <?php if($lang == 'en'){?> style="color: #ff9900;" <?php } ?>>EN</a> | 
+    <a class="language-link-item" href="/ctrl/article-list.php?lang=fr"
+        <?php if($lang == 'fr'){?> style="color: #ff9900;" <?php } ?>>FR</a>    
+</div> </li>
         </ul>
     </nav>
 </header>

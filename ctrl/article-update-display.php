@@ -24,8 +24,7 @@ class ArticleUpdateDisplay extends Ctrl
     {
         $id = $_GET ['id'];   
         $lang = $_GET['lang'] ?? 'fr';
-        $language = [];     
-        $article = LibArticle::getArticle($id);
+        $article = LibArticle::getArticle($id, $lang);
         $listCategorie = LibArticle::readAllCategorie();
         $articleCategorie = LibArticle::getCategorieIdsForArticle($id);
 

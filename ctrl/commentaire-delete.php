@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/commentaire.php';
 
 use App\Ctrl\Ctrl;
-use App\Model\Lib\Commentaire\Commentaire as LibCommentaire; 
+use App\Model\Lib\Commentaire\Commentaire as LibCommentaire;
 
 class commentDelete extends Ctrl
 {
@@ -22,19 +22,18 @@ class commentDelete extends Ctrl
 
     public function do(): void
     {
-        $id= $_GET['id'];
-        LibCommentaire::deleteCommentaire($id); 
-        $idArticle = $_GET['idArticle'];  
+        $id = $_GET['id'];
+        $idArticle = $_GET['idArticle'];
         $lang = $_GET['lang'] ?? 'fr';
 
-        $language = [];
-        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang-init.php";
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
 
         $this->addViewArg('lang', $lang);
         $this->addViewArg('language', $language);
-        // Les expose à la vue
-        
-        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle. '&lang=' . $lang);
+
+        LibCommentaire::deleteCommentaire($id);
+
+        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle . '&lang=' . $lang);
     }
 }
 

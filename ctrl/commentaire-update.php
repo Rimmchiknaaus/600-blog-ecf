@@ -6,40 +6,29 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/commentaire.php';
 
 use App\Ctrl\Ctrl;
-use App\Model\Lib\Commentaire\Commentaire as LibCommentaire; 
+use App\Model\Lib\Commentaire\Commentaire as LibCommentaire;
 
-class commentUpdate extends Ctrl
+class CommentaireUpdate extends Ctrl
 {
-    public function getPageTitle(): ?string
-    {
-        return null;
+    public function getPageTitle(): ?string { 
+        return null; 
     }
 
-    public function getViewFile(): ?string
-    {
-        return '/view/article-detail.php';
+    public function getViewFile(): ?string{ 
+        return null; 
     }
 
     public function do(): void
     {
-        $id= $_POST['id'];
+        $id = $_POST['id'];
         $idArticle = $_POST['idArticle'];
-        $contenu = $_POST ['contenu'];  
-        $lang = $_SESSION['lang'];
-        $lang = $_GET['lang'] ?? 'fr';
+        $contenu = $_POST['contenu'];
+        $lang = $_POST['lang'] ?? 'fr';
 
-        $language = [];
-        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
-
-        $this->addViewArg('lang', $lang);
-        $this->addViewArg('language', $language);
-
-        LibCommentaire::updateCommentaire ($id, $contenu);        
-        // Les expose à la vue
-        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle. '&lang=' . $lang);
-
+        LibCommentaire::updateCommentaire($id, $contenu);
+        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle . '&lang=' . $lang);
     }
 }
 
-$ctrl = new commentUpdate();
+$ctrl = new CommentaireUpdate();
 $ctrl->execute();

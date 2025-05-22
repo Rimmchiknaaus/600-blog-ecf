@@ -10,11 +10,8 @@ use App\Ctrl\Ctrl;
 use App\Model\Lib\Article\Article as LibArticle;  
 use App\Model\Lib\Commentaire\Commentaire as LibCommentaire;  
 
-
-/** Lister des questions. */
 class articleShow extends Ctrl
 {
-    /** @Override */
     public function getPageTitle(): ?string
     {
         return 'Lire plus';
@@ -25,33 +22,22 @@ class articleShow extends Ctrl
         return '/view/article-detail.php';
     }
 
-    /** @Override */
     public function do(): void
     {
-        // Lister des commentaires
         $id = $_GET['id'];
-        $articleList = LibArticle::getArticle($id);        
-        $commentaireList = LibCommentaire::listCommentaireFromArticle($id);
         $lang = $_GET['lang'] ?? 'fr';
-        $language = [];    
-        require $_SERVER['DOCUMENT_ROOT'] . '/view/lang/lang.'.$lang.'.php';    
-        // Les expose à la vue
-        
-        $this->addViewArg('articleList', $articleList);
 
-        // Les expose à la vue
+        require $_SERVER['DOCUMENT_ROOT'] . '/view/lang/lang.' . $lang . '.php';
 
+        $article = LibArticle::getArticle($id, $lang);
+        $commentaireList = LibCommentaire::listCommentaireFromArticle($id);
+
+        $this->addViewArg('article', $article);
         $this->addViewArg('commentaireList', $commentaireList);
         $this->addViewArg('lang', $lang);
         $this->addViewArg('language', $language);
-
-
-
-}
+    }
 }
 
-// Exécute le Controlleur
 $ctrl = new articleShow();
 $ctrl->execute();
-
-
