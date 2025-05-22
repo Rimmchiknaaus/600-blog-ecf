@@ -17,11 +17,18 @@ class ArticleAddDisplay extends Ctrl
 
     public function getViewFile(): ?string
     {
-        return '/view/article-add.php?lang= . $lang';
+        return '/view/article-add.php';
     }
 
     public function do(): void
     {
+        $lang = $_GET['lang'] ?? 'fr';
+
+        $language = [];
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
+
+        $this->addViewArg('lang', $lang);
+        $this->addViewArg('language', $language);
 
         $listCategorie = LibArticle::readAllCategorie();
         $this->addViewArg('listCategorie', $listCategorie);        
