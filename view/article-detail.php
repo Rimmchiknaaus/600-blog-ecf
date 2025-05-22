@@ -27,6 +27,14 @@ $article = $args['article'];
                     <li><a href="/ctrl/article-delete.php?id=<?= $article['id'] ?>&lang=<?= $lang ?>" class="btn-article"><?= $language['btn_delete'] ?></a></li>
                 </ul>
             <?php } ?>
+            <?php if (!empty($article['fichier'])): 
+                $pathParts = pathinfo($article['fichier']);
+                $basePath = $pathParts['dirname']; // /uploads/files
+                $fileName = rawurlencode($pathParts['basename']); // 6825b6a31041e_CV%26LM.pdf
+                $lien = $basePath . '/' . $fileName;
+                ?>
+                    <a href="<?= $lien ?>" class="download-button" download>Télécharger le fichier</a>
+            <?php endif; ?>
         </div>
 </section>
 
