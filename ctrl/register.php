@@ -46,12 +46,14 @@ class registerUser extends Ctrl
         $twigLoader = new FilesystemLoader(__DIR__ . '/../model/mail/templates');
         $twig = new Environment($twigLoader);
         $template = $twig->load('hello-' . $lang . '.twig');
-        $bodyMsg = $template->render(['name' => $name]);
+        $bodyMsg = $template->render(['name' => $name]);       
+        $templateAlt = $twig->load('hello-' . $lang . '-alt.twig');
+        $AltBodyMsg = $templateAlt->render(['name' => $name]);     
 
         $mail->addAddress ($email);  //Add a recipient     
         $mail->Subject = ($lang === 'en') ? 'Welcome to  Web3@Crypto' : 'Bienvenue sur Web3@Crypto';
         $mail->Body    = $bodyMsg; 
-        //$mail->AltBody = strip_tags($bodyMsg);
+        $mail->AltBody =$AltBodyMsg;
 
         // Vérifie les mots de passe
         if ($password !== $passwordRepeat) {
