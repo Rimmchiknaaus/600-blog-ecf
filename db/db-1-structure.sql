@@ -46,10 +46,10 @@ CREATE TABLE user (
 CREATE TABLE article (
      id INT AUTO_INCREMENT PRIMARY KEY
     ,idUser INT NOT NULL
-    ,en_titre VARCHAR(100) NOT NULL
-    ,en_contenu TEXT NOT NULL
-    ,fr_titre VARCHAR(100) NOT NULL
-    ,fr_contenu TEXT NOT NULL
+    ,en_titre VARCHAR(100) NULL
+    ,en_contenu TEXT NULL
+    ,fr_titre VARCHAR(100) NULL
+    ,fr_contenu TEXT NULL
     ,image VARCHAR(100) NOT NULL
     ,fichier  VARCHAR(100) NULL
     ,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  COMMENT 'Date de création'
