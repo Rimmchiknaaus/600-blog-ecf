@@ -22,5 +22,35 @@ $language['label_name'] = "Prénom";
 $language['label_email'] = "Email";
 $language['label_password'] = "Mot de passe";
 $language['label_repeat_password'] = "Répéter le mot de passe";
+$language['article_add_title'] = "Nouvel article";
+$language['article_add_label_title'] = "Titre :";
+$language['article_add_label_body'] = "Contenu :";
+$language['article_add_label_image'] = "Image de l'article :";
+$language['article_add_label_file'] = "Fichier à télécharger (PDF) :";
+$language['article_add_label_cat'] = "Catégories";
+$language['article_add_button_send'] = "Publier";
+$language['article_detail_title'] = "Nouvel article";
+$language['article_detail_updated'] = "mis à jour le";
+$language['article_detail_by'] = "par";
+$language['btn_edit'] = "Modifier";
+$language['btn_delete'] = "Supprimer";
+$language['btn_send'] = "Envoyer";
+$language['btn_save'] = "Enregistrer";
+$language['btn_cancel'] = "Annuler";
+$language['btn_login'] = "Se connecter";
+$language['comment_add_title'] = "Ajouter un commentaire";
+$language['comment_placeholder'] = "Votre commentaire...";
+$language['comment_auth_required'] = "Vous devez être connecté pour laisser un commentaire.";
+$language['comment_list_title'] = "Commentaires";
+$language['comment_delete_confirm'] = "Supprimer ce commentaire ?";
+$language['article_edit_title'] = "Modifier article";
+$language['article_edit_label_title'] = "Titre :";
+$language['article_edit_label_body'] = "Contenu :";
+$language['article_edit_label_image'] = "Image de l'article :";
+$language['article_edit_label_file'] = "Fichier à télécharger (PDF) :";
+$language['article_edit_button_submit'] = "Publier";
+$language['comment_none'] = "Pas de commentaires";
+$language['language'] = "Langue";
+
 
 ?>

@@ -29,11 +29,12 @@ class addCommentaire extends Ctrl
         // Lister des commentaires
         $idArticle = $_POST['idArticle'];
         $idUser =  $_SESSION['user']['id'];
-        $contenu = $_POST ['contenu'];  
+        $contenu = $_POST ['contenu'];
+        $lang = $_GET['lang'] ?? 'fr';  
         LibCommentaire::createCommentaire($idArticle, $idUser, $contenu);        
         // Les expose à la vue
         
-        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle);
+        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle. '&lang=' . $lang);
 }
 }
 

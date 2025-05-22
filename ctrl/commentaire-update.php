@@ -25,11 +25,12 @@ class commentUpdate extends Ctrl
         $id= $_POST['id'];
         $idArticle = $_POST['idArticle'];
         $contenu = $_POST ['contenu'];  
+        $lang = $_GET['lang'] ?? 'fr';
 
         LibCommentaire::updateCommentaire ($id, $contenu);        
         // Les expose à la vue
         
-        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle);
+        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle. '&lang=' . $lang);
     }
 }
 

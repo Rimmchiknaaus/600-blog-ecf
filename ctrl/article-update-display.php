@@ -17,7 +17,7 @@ class ArticleUpdateDisplay extends Ctrl
 
     public function getViewFile(): ?string
     {
-        return '/view/article-update.php';
+        return '/view/article-update.php?lang= . $lang';
     }
 
     public function do(): void
@@ -27,7 +27,13 @@ class ArticleUpdateDisplay extends Ctrl
         $listCategorie = LibArticle::readAllCategorie();
         $articleCategorie = LibArticle::getCategorieIdsForArticle($id);
 
-        
+        $lang = $_GET['lang'] ?? 'fr';
+
+        $language = [];
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
+
+        $this->addViewArg('lang', $lang);
+        $this->addViewArg('language', $language);
         $this->addViewArg('article', $article);
         $this->addViewArg('articleCategorie', $articleCategorie);
         $this->addViewArg('listCategorie', $listCategorie);

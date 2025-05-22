@@ -25,9 +25,10 @@ class commentDelete extends Ctrl
         $id= $_GET['id'];
         LibCommentaire::deleteCommentaire($id); 
         $idArticle = $_GET['idArticle'];  
+        $lang = $_GET['lang'] ?? 'fr';
         // Les expose à la vue
         
-        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle);
+        $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle. '&lang=' . $lang);
     }
 }
 

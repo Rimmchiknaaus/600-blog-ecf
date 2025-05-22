@@ -29,7 +29,7 @@ class ArticleUpdate extends Ctrl
         $fr_titre = $_POST['en_titre'];
         $fr_contenu = $_POST['en_contenu'];
         $categories =  $_POST['categories'];
-        
+        $lang = $_GET['lang'] ?? 'fr';
 
         $imagePath = null;
         if (!empty($_FILES['image']['name'])) {
@@ -48,7 +48,7 @@ class ArticleUpdate extends Ctrl
         LibArticle::updateArticle($id, $en_titre, $en_contenu, $fr_titre, $fr_contenu, $categories, $imagePath, $fichierPath);
 
         // rediriger vers la list de question
-        $this->redirectTo('/ctrl/article-detail.php?id=' . $id);
+        $this->redirectTo('/ctrl/article-detail.php?id=' . $id . '&lang=' . $lang);
     }
 }
 
