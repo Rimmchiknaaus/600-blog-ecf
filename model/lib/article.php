@@ -66,9 +66,12 @@ class Article
         return array_column($idCategorie, 'idCategorie');
     }
 
-    public static function getArticlesByCategorie(int $categorieId): array
+    public static function getArticlesByCategorie(int $categorieId, string $lang = 'fr'): array
     {
-        $query = "SELECT article.id, article.idUser, article.en_titre, article.en_contenu, article.fr_titre, article.fr_contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(DISTINCT categorie.label SEPARATOR ' / ') AS categories";
+        $titreCol = $lang . '_titre';
+        $contenuCol = $lang . '_contenu';
+
+        $query = "SELECT article.id, article.idUser, article.$titreCol AS titre, article.$contenuCol AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(DISTINCT categorie.label SEPARATOR ' / ') AS categories";
         $query .= ' FROM article';
         $query .= ' JOIN user ON article.idUser = user.id';
         $query .= ' JOIN article_categorie ON article.id = article_categorie.idArticle';
