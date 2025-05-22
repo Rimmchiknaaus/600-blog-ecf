@@ -1,4 +1,5 @@
 <?php
+$language['site'] = 'Web3&Crypto';
 $language['h1'] = 'Latest articles';
 $language['categorie'] = 'All';
 $language['meta_update'] = 'updated at';
