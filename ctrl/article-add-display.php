@@ -25,7 +25,7 @@ class ArticleAddDisplay extends Ctrl
         $lang = $_GET['lang'] ?? 'fr';
 
         $language = [];
-        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang-init.php";
 
         $this->addViewArg('lang', $lang);
         $this->addViewArg('language', $language);

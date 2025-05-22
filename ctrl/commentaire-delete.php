@@ -26,6 +26,12 @@ class commentDelete extends Ctrl
         LibCommentaire::deleteCommentaire($id); 
         $idArticle = $_GET['idArticle'];  
         $lang = $_GET['lang'] ?? 'fr';
+
+        $language = [];
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang-init.php";
+
+        $this->addViewArg('lang', $lang);
+        $this->addViewArg('language', $language);
         // Les expose à la vue
         
         $this->redirectTo('/ctrl/article-detail.php?id=' . $idArticle. '&lang=' . $lang);

@@ -1,3 +1,7 @@
+<?php
+    $lang = $args['lang'];
+    $language = $args['language'];
+?>
 
 <head>
     <link rel="stylesheet" href="/asset/css/style.css">
@@ -37,17 +41,16 @@
                         <span class="article-author"><?=$language['meta_by']?> <?= $article['auteur'] ?></span>
                     </div>
 
-                    <h2 class="titre" ><?= $article [$lang.'titre'] ?></h2>
+                    <h2 class="titre" ><?= $article ['titre'] ?></h2>
 
                     <p class="article-categories">
                         <?= $article['categories'] ?>
                     </p>
-
                     <p class="article-extrait">
-                        <?= substr(strip_tags($article[$lang.'contenu']), 0, 150) ?>...
+                    <?= substr(strip_tags($article['contenu'] ?? ''), 0, 150) ?>...
                     </p>
 
-                    <a href="/ctrl/article-detail.php?id=<?= $article['id'] ?>" class="btn-detail"><?=$language['read']?></a>
+                    <a href="/ctrl/article-detail.php?id=<?= $article['id'] ?>&lang=<?= $lang ?>" class="btn-detail"><?=$language['read']?></a>
                     </div>
                 </div>
         <?php } ?>

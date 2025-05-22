@@ -40,7 +40,6 @@ class registerUser extends Ctrl
 
         $mail = Mailer::sendEmail ();
 
-
         // Twig
 
         $twigLoader = new FilesystemLoader(__DIR__ . '/../model/mail/templates');

@@ -25,8 +25,9 @@ class articleDelete extends Ctrl
     {
         //Supprime la Question
         $id = $_GET['id'];
-        LibArticle::deleteArticle($id);
         $lang = $_GET['lang'] ?? 'fr';
+        LibArticle::deleteArticle($id);
+
 
         // // Redirige vers la liste des Questions
         $this->redirectTo('/ctrl/article-list.php?lang=' . $lang);

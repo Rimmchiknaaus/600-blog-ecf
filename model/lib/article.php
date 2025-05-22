@@ -12,7 +12,8 @@ class Article
 {
     public static function readAllArticle(): array
     {
-        $query = "SELECT article.id, article.idUser, article.en_titre, article.en_contenu, article.fr_titre, article.fr_contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
+
+        $query = "SELECT article.id, article.idUser, article.en_titre AS titre, article.en_contenu AS contenu, article.fr_titre  AS titre, article.fr_contenu AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
         $query .= ' FROM article';
         $query .= ' JOIN user ON article.idUser = user.id';
         $query .= ' LEFT JOIN article_categorie ON article.id = article_categorie.idArticle';
@@ -26,7 +27,8 @@ class Article
 
     public static function getArticle($id): ?array
     {
-        $query =  "SELECT article.id, article.idUser, article.en_titre, article.en_contenu, article.fr_titre, article.fr_contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
+
+        $query =  "SELECT article.id, article.idUser, article.en_titre AS titre, article.en_contenu AS contenu, article.fr_titre  AS titre, article.fr_contenu AS contenu, article.image, article.fichier, article.created_at, article.updated_at, user.name AS auteur, GROUP_CONCAT(categorie.label SEPARATOR ' / ') AS categories";
         $query .= ' FROM article';
         $query .= ' JOIN user ON article.idUser = user.id';
         $query .= ' LEFT JOIN article_categorie ON article.id = article_categorie.idArticle';
@@ -111,6 +113,8 @@ class Article
 
     public static function updateArticle(int $id, string $en_titre, string $en_contenu, string $fr_titre, string $fr_contenu, $categories, ?string $image, ?string $fichier): bool
     {
+
+
         $query = 'UPDATE article SET en_titre = :en_titre, en_contenu = :en_contenu, fr_titre = :fr_titre, fr_contenu = :fr_contenu, image = :image, fichier = :fichier WHERE id = :id';
 
         $statement = LibBdd::connect()->prepare($query);
@@ -121,7 +125,6 @@ class Article
         $statement->bindParam(':image', $image);
         $statement->bindParam(':fichier', $fichier);
         $statement->bindParam(':id', $id);
-        $statement->execute();
 
         $stmtDelete = LibBdd::connect()->prepare('DELETE FROM article_categorie WHERE idArticle = :idArticle');
         $stmtDelete->execute([':idArticle' => $id]);

@@ -30,7 +30,14 @@ class addCommentaire extends Ctrl
         $idArticle = $_POST['idArticle'];
         $idUser =  $_SESSION['user']['id'];
         $contenu = $_POST ['contenu'];
-        $lang = $_GET['lang'] ?? 'fr';  
+        $lang = $_SESSION['lang'];
+        $lang = $_GET['lang'] ?? 'fr';
+
+        $language = [];
+
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
+        $this->addViewArg('lang', $lang);
+        $this->addViewArg('language', $language);
         LibCommentaire::createCommentaire($idArticle, $idUser, $contenu);        
         // Les expose à la vue
         

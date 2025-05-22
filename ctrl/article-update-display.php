@@ -17,19 +17,18 @@ class ArticleUpdateDisplay extends Ctrl
 
     public function getViewFile(): ?string
     {
-        return '/view/article-update.php?lang= . $lang';
+        return '/view/article-update.php';
     }
 
     public function do(): void
     {
-        $id = $_GET ['id'];        
+        $id = $_GET ['id'];   
+        $lang = $_GET['lang'] ?? 'fr';
+        $language = [];     
         $article = LibArticle::getArticle($id);
         $listCategorie = LibArticle::readAllCategorie();
         $articleCategorie = LibArticle::getCategorieIdsForArticle($id);
 
-        $lang = $_GET['lang'] ?? 'fr';
-
-        $language = [];
         require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
 
         $this->addViewArg('lang', $lang);

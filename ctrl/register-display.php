@@ -29,6 +29,7 @@ class registerUserDisplay extends Ctrl
         $language = [];
         require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
 
+
         $this->addViewArg('lang', $lang);
         $this->addViewArg('language', $language);
 

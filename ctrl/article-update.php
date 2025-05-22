@@ -23,13 +23,13 @@ class ArticleUpdate extends Ctrl
     public function do(): void
     {
         // Lis les informations saisies dans le formulaire
+        $lang = $_GET['lang'] ?? 'fr';
         $id =  $_POST['id'];
         $en_titre = $_POST['en_titre'];
         $en_contenu = $_POST['en_contenu'];
-        $fr_titre = $_POST['en_titre'];
-        $fr_contenu = $_POST['en_contenu'];
+        $fr_titre = $_POST['fr_titre'];
+        $fr_contenu = $_POST['fr_contenu'];
         $categories =  $_POST['categories'];
-        $lang = $_GET['lang'] ?? 'fr';
 
         $imagePath = null;
         if (!empty($_FILES['image']['name'])) {

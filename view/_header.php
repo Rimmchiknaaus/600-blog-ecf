@@ -9,11 +9,10 @@
 </head>
 <body>
 <?php require $_SERVER['DOCUMENT_ROOT'] . '/view/lang/lang-init.php'; ?>
-
     <header>
     <nav class="navbar">
         <div class="nav-top">
-            <li><a class="logo" href="/ctrl/article-list.php?lang=<?= $lang ?>">Crypto Blog</a></li>         
+            <li><a class="logo" href="/ctrl/article-list.php?lang=<?= $lang ?>"><?=$language['site']?></a></li>         
             <button class="burger" id="burger" aria-label="Ouvrir le menu"><span></span></button>    
         </div>
 

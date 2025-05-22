@@ -23,12 +23,12 @@ class ArticleAdd extends Ctrl
     public function do(): void
     {
 
-        $en_titre = $_POST['en_titre'];
-        $en_contenu = $_POST['en_contenu'];
-        $fr_titre = $_POST['en_titre'];
-        $fr_contenu = $_POST['en_contenu'];
+        $lang = $_POST['lang'];
+        $titre = $_POST['titre'];
+        $contenu = $_POST['contenu'];
         $categories = $_POST['categories'] ?? [];
         $idUser = $_SESSION['user']['id'];
+        $lang = $_GET['lang'] ?? 'fr';
 
         $imageName = uniqid() . '_' . basename($_FILES['image']['name']);
         $imagePath = '/uploads/images/' . $imageName;
@@ -43,9 +43,9 @@ class ArticleAdd extends Ctrl
         }
 
     
-        LibArticle::createArticle($en_titre, $en_contenu, $fr_titre, $fr_contenu, $categories, $imagePath, $fichierPath, $idUser);
+        LibArticle::createArticle($lang, $titre, $contenu, $categories, $imagePath, $fichierPath, $idUser);
 
-        $this->redirectTo('/ctrl/article-list.php');
+        $this->redirectTo('/ctrl/article-list.php?lang=' . $lang);
 
     }
 }

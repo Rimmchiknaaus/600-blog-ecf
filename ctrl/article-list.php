@@ -4,6 +4,7 @@ namespace App\Ctrl;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/ctrl/ctrl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/article.php';
+require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang-init.php";
 
 use App\Ctrl\Ctrl;
 use App\Model\Lib\Article\Article as LibArticle;  
@@ -26,10 +27,9 @@ class ArticleList extends Ctrl
     public function do(): void
     {
         // Déterminer la langue
-        $lang = 'en';
-        if (isset($_GET['lang'])) {
-            $lang = $_GET['lang'];
-        }
+        $lang = $_GET['lang'] ?? 'fr';
+        // Charger les fichiers de traduction
+        require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
     
         // Récupérer les articles selon la catégorie (si spécifiée)
         $categorieId = $_GET['categorie'] ?? null;
@@ -42,8 +42,7 @@ class ArticleList extends Ctrl
         // Lire toutes les catégories
         $listCategorie = LibArticle::readAllCategorie();
     
-        // Charger les fichiers de traduction
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/view/lang/lang.' . $lang . '.php';
+
     
         // Transmettre les variables à la vue
         $this->addViewArg('listArticle', $listArticle);

@@ -22,7 +22,7 @@ class articleShow extends Ctrl
 
     public function getViewFile(): ?string
     {
-        return '/view/article-detail.php?lang= . $lang';
+        return '/view/article-detail.php';
     }
 
     /** @Override */
@@ -33,7 +33,8 @@ class articleShow extends Ctrl
         $articleList = LibArticle::getArticle($id);        
         $commentaireList = LibCommentaire::listCommentaireFromArticle($id);
         $lang = $_GET['lang'] ?? 'fr';
-        $language = [];        
+        $language = [];    
+        require $_SERVER['DOCUMENT_ROOT'] . '/view/lang/lang.'.$lang.'.php';    
         // Les expose à la vue
         
         $this->addViewArg('articleList', $articleList);
@@ -43,6 +44,9 @@ class articleShow extends Ctrl
         $this->addViewArg('commentaireList', $commentaireList);
         $this->addViewArg('lang', $lang);
         $this->addViewArg('language', $language);
+
+
+
 }
 }
 
