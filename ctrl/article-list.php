@@ -29,11 +29,13 @@ class ArticleList extends Ctrl
         require $_SERVER['DOCUMENT_ROOT'] . "/view/lang/lang.$lang.php";
 
         // 3. Articles (selon catégorie ou non)
+
+        $isAdmin = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin';
         $categorieId = $_GET['categorie'] ?? null;
         if ($categorieId) {
-            $listArticle = LibArticle::getArticlesByCategorie($categorieId, $lang);
+            $listArticle = LibArticle::getArticlesByCategorie($categorieId, $lang, $isAdmin);
         } else {
-            $listArticle = LibArticle::readAllArticle($lang);
+            $listArticle = LibArticle::readAllArticle($lang, $isAdmin);
         }
 
         // 4. Catégories

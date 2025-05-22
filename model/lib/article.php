@@ -10,7 +10,7 @@ use  App\Model\Lib\BDD as LibBdd;
 
 class Article
 {
-    public static function readAllArticle(string $lang = 'fr'): array
+    public static function readAllArticle(string $lang = 'fr', bool $isAdmin = false): array
     {
         $titreCol = $lang . '_titre';
         $contenuCol = $lang . '_contenu';
@@ -20,6 +20,9 @@ class Article
         $query .= ' JOIN user ON article.idUser = user.id';
         $query .= ' LEFT JOIN article_categorie ON article.id = article_categorie.idArticle';
         $query .= ' LEFT JOIN categorie ON article_categorie.idCategorie = categorie.id'; 
+            if (!$isAdmin) {
+                $query .= " WHERE article.$titreCol IS NOT NULL AND article.$titreCol != '' ";
+            }
         $query .= ' GROUP BY article.id';
         $query .= ' ORDER BY article.created_at DESC';
         $statement = LibBdd::connect()->prepare($query);
@@ -66,7 +69,7 @@ class Article
         return array_column($idCategorie, 'idCategorie');
     }
 
-    public static function getArticlesByCategorie(int $categorieId, string $lang = 'fr'): array
+    public static function getArticlesByCategorie(int $categorieId, string $lang = 'fr', bool $isAdmin = false): array
     {
         $titreCol = $lang . '_titre';
         $contenuCol = $lang . '_contenu';
@@ -77,6 +80,9 @@ class Article
         $query .= ' JOIN article_categorie ON article.id = article_categorie.idArticle';
         $query .= ' JOIN categorie ON categorie.id = article_categorie.idCategorie';
         $query .= ' WHERE article_categorie.idCategorie = :categorieId';
+        if (!$isAdmin) {
+            $query .= " AND article.$titreCol IS NOT NULL AND article.$titreCol != '' ";
+        }
         $query .= ' GROUP BY article.id';
         $query .= ' ORDER BY article.created_at DESC';
 
