@@ -42,7 +42,7 @@ class registerUser extends Ctrl
 
         // Twig
 
-        $twigLoader = new FilesystemLoader(__DIR__ . '/../model/mail/templates');
+        $twigLoader = new FilesystemLoader( $_SERVER['DOCUMENT_ROOT'] .  '/../model/mail/templates');
         $twig = new Environment($twigLoader);
         $template = $twig->load('hello-' . $lang . '.twig');
         $bodyMsg = $template->render(['name' => $name]);       
