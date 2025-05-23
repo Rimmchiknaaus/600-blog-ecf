@@ -32,8 +32,8 @@ class registerUser extends Ctrl
     public function do(): void
     {
         // Lis les informations saisies dans le formulaire
-        $email = $_POST['myEmail'];
-        $password = $_POST['myPassword'];
+        $email = htmlspecialchars(trim($_POST['myEmail'])) ;
+        $password = htmlspecialchars(trim($_POST['myPassword']));
         $passwordRepeat = $_POST['myPasswordRepeat'];
         $name = $_POST['myName'];
         $lang = $_GET['lang'] ?? 'fr';
