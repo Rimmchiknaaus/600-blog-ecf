@@ -47,7 +47,9 @@ class registerUser extends Ctrl
         $template = $twig->load('hello-' . $lang . '.twig');
         $bodyMsg = $template->render(['name' => $name]);       
         $templateAlt = $twig->load('hello-' . $lang . '-alt.twig');
-        $AltBodyMsg = $templateAlt->render(['name' => $name]);     
+        $AltBodyMsg = $templateAlt->render(['name' => $name]); 
+        
+        $mail->CharSet = "UTF-8";
 
         $mail->addAddress ($email);  //Add a recipient     
         $mail->Subject = ($lang === 'en') ? 'Welcome to  Web3@Crypto' : 'Bienvenue sur Web3@Crypto';
