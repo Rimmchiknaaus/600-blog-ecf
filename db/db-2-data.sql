@@ -1,5 +1,5 @@
 -- Explicite le nom de la base de données à utiliser pour exécuter les commandes SQL à suivre
-USE `blog-lang`
+USE `rimma_blog`
 ;
 
  -- Ouvre une 'transaction' (tout le script qui suit est exécuté en entier, à la moindre erreur, tout est annulé. c'est très pratique !)
