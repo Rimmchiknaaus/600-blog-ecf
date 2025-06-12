@@ -11,27 +11,27 @@ use  App\Model\Lib\BDD as LibBdd;
 class Auth
 {
 
-public static function getUser(string $email) 
+public static function getUtilisateur(string $email) 
     {
         // Prépare la requête
-        $query = '  SELECT user.id, user.name, user.email, user.password, user.hashedPassword, user.role';
-        $query .= ' FROM user';
-        $query .= ' WHERE user.email = :email';
+        $query = '  SELECT utilisateur.id, utilisateur.name, utilisateur.email, utilisateur.password, utilisateur.hashedPassword';
+        $query .= ' FROM utilisateur';
+        $query .= ' WHERE utilisateur.email = :email';
         $statement = LibBdd::connect()->prepare($query);
         $statement->bindParam(':email', $email);
 
         $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $utilisateur = $statement->fetch(PDO::FETCH_ASSOC);
 
-        return $user;
+        return $utilisateur;
     }
 
-    public static function createUser($name, $email,  $password, $hashedPassword): bool
+    public static function createUtilisateur($name, $email,  $password, $hashedPassword): bool
     {
         // Prépare la requête
         // NOTE la requête a des paramètres !
         // NOTE il faut utiliser 'bindParam' pour 'faire le lien' entre, par exemple, le 'paramètre nommé' ':label' dans la requête, et la variable passée en paramètre de la fonction $label
-        $query = '  INSERT INTO user(name, email, password, hashedPassword) VALUES(:name, :email, :password, :hashedPassword)';
+        $query = '  INSERT INTO utilisateur(name, email, password, hashedPassword) VALUES(:name, :email, :password, :hashedPassword)';
         $statement = LibBdd::connect()->prepare($query);
         $statement->bindParam(':name', $name);
         $statement->bindParam(':email', $email);
@@ -45,18 +45,18 @@ public static function getUser(string $email)
         return $successOrFailure;
     }   
     
-public static function updateUser($id, $name, $email,  $password, $hashedPassword): bool
+public static function updateUtilisateur($id, $name, $email,  $password, $hashedPassword): bool
     {
         // Prépare la requête
         // NOTE la requête a des paramètres !
         // NOTE il faut utiliser 'bindParam' pour 'faire le lien' entre, par exemple, le 'paramètre nommé' ':label' dans la requête, et la variable passée en paramètre de la fonction $label
-        $query = '  UPDATE user';
+        $query = '  UPDATE utilisateur';
         $query.= '  SET';
-        $query.= '  user.name = :name';
-        $query.= '  ,user.email = :email';
-        $query.= '  ,user.password = :password';
-        $query.= '  ,user.hashedPassword = :hashedPassword';
-        $query.= '  WHERE user.id = :id';
+        $query.= '  utilisateur.name = :name';
+        $query.= '  ,utilisateur.email = :email';
+        $query.= '  ,utilisateur.password = :password';
+        $query.= '  ,utilisateur.hashedPassword = :hashedPassword';
+        $query.= '  WHERE utilisateur.id = :id';
         $statement = LibBdd::connect()->prepare($query);
         $statement->bindParam(':id', $id);
         $statement->bindParam(':name', $name);

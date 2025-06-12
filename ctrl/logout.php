@@ -27,8 +27,7 @@ class logoutUser extends Ctrl
     public function do(): void
     {
         $_SESSION = [];
-        $lang = $_GET['lang'] ?? 'fr';
-        $this->redirectTo('/ctrl/article-list.php?lang=' . $lang);        
+        $this->redirectTo('/ctrl/task-list.php');        
     }
 }
 

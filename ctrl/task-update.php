@@ -8,7 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/model/lib/task.php';
 use App\Ctrl\Ctrl;
 use App\Model\Lib\Task as LibTask;
 
-class taskDelete extends Ctrl
+class taskUpdate extends Ctrl
 {
     public function getPageTitle(): ?string
     {
@@ -22,13 +22,18 @@ class taskDelete extends Ctrl
 
     public function do(): void
     {
-        $id = $_GET['id'];
+        // Lis les informations saisies dans le formulaire
+        $id =  $_POST['id'];
+        $idCategorie = $_POST['idCategorie'];
+        $name = $_POST['name'];
+        $description =  $_POST['description'];
 
-        LibTask::deleteTask($id);
+        LibTask::updateTask($id, $idCategorie, $name, $description);
 
+        // rediriger vers l'article
         $this->redirectTo('/ctrl/task-list.php');
     }
 }
 
-$ctrl = new taskDelete();
+$ctrl = new taskUpdate();
 $ctrl->execute();
