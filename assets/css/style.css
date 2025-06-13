@@ -1,7 +1,6 @@
 @import url('header.css');
-@import url('article-list.css');
-@import url('article-detail.css');
-@import url('article-add-update.css');
+@import url('task-list.css');
+
 
 
 body{

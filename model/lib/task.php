@@ -13,7 +13,7 @@ class Task
     public static function readAllTask(): array
     {
 
-        $query = "SELECT task.id, task.idUtilisateur, task.idCategorie, task.name, task.description, task.created_at, task.updated_at";
+        $query = "SELECT task.id, task.idUtilisateur, task.idCategorie, task.name, task.description, task.created_at, task.updated_at, categorie.label AS categorie";
         $query .= ' FROM task';
         $query .= ' JOIN utilisateur ON task.idUtilisateur = utilisateur.id';
         $query .= ' LEFT JOIN categorie ON task.idCategorie = categorie.id'; 
@@ -25,7 +25,7 @@ class Task
 
     public static function getTask(int $id): ?array
     {
-        $query = "SELECT task.id, task.idUtilisateur, task.idCategorie, task.name, task.description, task.created_at, task.updated_at";
+        $query = "SELECT task.id, task.idUtilisateur, task.idCategorie, task.name, task.description, task.created_at, task.updated_at, categorie.label AS categorie";
         $query .= ' FROM task';
         $query .= ' JOIN utilisateur ON task.idUtilisateur = utilisateur.id';
         $query .= ' LEFT JOIN categorie ON task.idCategorie = categorie.id'; 
@@ -42,7 +42,7 @@ class Task
 
     public static function readAllCategorie(): ?array
     {
-        $query = 'SELECT categorie.id, categorie.label, categorie.displayRank';
+        $query = 'SELECT categorie.id, categorie.label, categorie.displayRank, categorie.label AS categorie';
         $query .= ' FROM categorie';
         $query .= ' ORDER BY categorie.displayRank';
         $statement = LibBdd::connect()->prepare($query);
@@ -52,7 +52,7 @@ class Task
 
     public static function getTaskByCategorie(int $categorieId): array
     {
-        $query = "SELECT task.id, task.idUtilisateur, task.idCategorie, task.name, task.description, task.created_at, task.updated_at";
+        $query = "SELECT task.id, task.idUtilisateur, task.idCategorie, task.name, task.description, task.created_at, task.updated_at, categorie.label AS categorie";
         $query .= ' FROM task';
         $query .= ' JOIN utilisateur ON task.idUtilisateur = utilisateur.id';
         $query .= ' LEFT JOIN categorie ON task.idCategorie = categorie.id'; 
@@ -68,7 +68,7 @@ class Task
 
     public static function createTask($idUtilisateur, $idCategorie, $name, $description): bool 
     {
-        $query = "INSERT INTO task (idUtilisateur, idCategorie, name, description) VALUES (:idUtilisaeur, :idCategorie, :name, :description)";
+        $query = "INSERT INTO task (idUtilisateur, idCategorie, name, description) VALUES (:idUtilisateur, :idCategorie, :name, :description)";
         $statement = LibBdd::connect()->prepare($query);
 
         $statement->bindParam(':idUtilisateur', $idUtilisateur);
@@ -76,13 +76,13 @@ class Task
         $statement->bindParam(':name', $name);
         $statement->bindParam(':description', $description);
 
-        $successOrFailure = $statement->execute();
-        return $successOrFailure;
+        $statement->execute();
+        return true;
     }
 
     public static function updateTask(int $id, $idCategorie, $name, $description): bool
     {
-        $query = "UPDATE task SET $idCategorie = :idCategorie, $name = :name, description = :description WHERE id = :id";
+        $query = "UPDATE task SET idCategorie = :idCategorie, name = :name, description = :description WHERE id = :id";
 
         $statement = LibBdd::connect()->prepare($query);
         $statement->bindParam(':idCategorie', $idCategorie);

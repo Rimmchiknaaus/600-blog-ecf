@@ -32,6 +32,8 @@ class taskUpdate extends Ctrl
 
         // rediriger vers l'article
         $this->redirectTo('/ctrl/task-list.php');
+
+
     }
 }
 
