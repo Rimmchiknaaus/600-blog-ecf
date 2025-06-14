@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
+
     <header>
+    <div class="layout">
     <nav class="navbar">
         <div class="nav-top">
             <li><a class="logo" href="/ctrl/task-list.php">ToDo</a></li>         
@@ -25,6 +27,7 @@
                     <?php endif; ?>
         </ul>
     </nav>
+    <div class="layout">
 </header>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -37,6 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
+<script src="https://kit.fontawesome.com/026a02d0be.js" crossorigin="anonymous"></script>
 </body>
 </html>

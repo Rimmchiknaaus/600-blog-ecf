@@ -1,5 +1,5 @@
 <?php $editId = $_GET['edit'] ?? null; ?>
-
+<div class="layout">
 <section class="task-form">
 <h2>Ajouter une tâche</h2>
 <form action="/ctrl/task-add.php" method="post" enctype="multipart/form-data">
@@ -18,6 +18,7 @@
 <hr>
 
 <section class="task-list">
+
 
 <h2>Liste des tâches</h2>
 <ul>
@@ -41,9 +42,22 @@
                     <a href="/view/task-list.php">Annuler</a>
                 </form>
             <?php else: ?>
-                <strong><?= htmlspecialchars($task['name'] ?? '') ?></strong>
-                (<?= htmlspecialchars($task['categorie'] ?? 'Catégorie inconnue') ?>)<br>
-                <?= nl2br(htmlspecialchars($task['description'] ?? '')) ?><br>
+                <details>
+                <summary> 
+                <?php if ( $task ['idCategorie'] === 1){ ?>
+                <i  style="color: red;"class="fa-regular fa-hand-point-up"></i>
+                <em style="color: red;"><?= htmlspecialchars($task['categorie'] ?? 'Catégorie inconnue') ?></em>
+            <?php } ?>
+            <?php if ( $task ['idCategorie'] === 2){ ?>
+                <i  style="color: orange;"class="fa-regular fa-hourglass"></i>
+                <em style="color: orange;"><?= htmlspecialchars($task['categorie'] ?? 'Catégorie inconnue') ?></em>
+            <?php } ?>
+            <?php if ( $task ['idCategorie'] === 3){ ?>
+                <i style="color: green;"  class="fa-regular fa-bell-slash"></i>
+                <em style="color: green;"><?= htmlspecialchars($task['categorie'] ?? 'Catégorie inconnue') ?></em>
+            <?php } ?><strong><?= htmlspecialchars($task['name'] ?? '') ?></strong><br></summary>
+                <p><?= nl2br(htmlspecialchars($task['description'] ?? '')) ?><br></p>
+                </details>
 
                 <section class="task-action">
                 <a href="/ctrl/task-list.php?edit=<?= $task['id'] ?>">Modifier</a> |
@@ -54,3 +68,4 @@
     <?php endforeach; ?>
 </ul>
 </section>
+</div>
